@@ -1,12 +1,10 @@
-@extends('layouts.app')
+@extends ('layouts.app')
 
 @section('content')
     <div class="container">
-        <div class="col-md-offset-3 col-md-6">
-            <div class="jumbotron">
-                <h1>New Ticket</h1>
-                @include('forms.createTicket')
-            </div>
+        <div class="jumbotron">
+              <h1>This is where we'll edit a ticket.</h1>
+              @include('forms.editTicket')
         </div>
     </div>
 @stop

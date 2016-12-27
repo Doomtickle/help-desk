@@ -22,3 +22,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\TroubleTicket::class, function (Faker\Generator $faker) {
+
+
+    $index = array_rand(App\Utilities\Company::all());
+    $company = App\Utilities\Company::find($index);
+    return [
+        'title' => $faker->word,
+        'user_id' => 1,
+        'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
+        'website' => $company,
+        'complete' => $faker->boolean($chanceOfGettingTrue = 50)
+    ];
+});

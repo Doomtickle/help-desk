@@ -133,5 +133,10 @@ class Company{
     {
         return (static::$companies);
     }
+
+    public static function find($id)
+    {
+        return (static::$companies[$id]);
+    }
     
 }

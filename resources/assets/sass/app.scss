@@ -7,3 +7,13 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.grid-sizer,
+.grid-item{
+    width:30%;
+    float:left;
+    margin:0 5px;
+}
+.btn-full-width{
+    width:100% !important;
+}

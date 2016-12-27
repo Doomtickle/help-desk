@@ -7,7 +7,6 @@ use App\Utilities\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-
 class TroubleTicketController extends Controller
 {
     protected $user_id;
@@ -21,7 +20,9 @@ class TroubleTicketController extends Controller
      */
     public function index()
     {
-        //
+        $tickets = TroubleTicket::all();
+
+        return view('troubletickets.index', compact('tickets'));
     }
 
     /**
@@ -74,7 +75,8 @@ class TroubleTicketController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ticket = TroubleTicket::ticketInfo($id);
+        return view('troubletickets.edit', compact('ticket'));
     }
 
     /**
@@ -84,9 +86,11 @@ class TroubleTicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, TroubleTicket $ticket)
     {
-        //
+        $ticket->update($request->all());
+
+        return back();
     }
 
     /**

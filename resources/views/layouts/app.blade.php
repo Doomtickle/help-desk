@@ -87,6 +87,7 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script src="/js/libs.js"></script>
     @yield('scripts.footer')
 </body>
 </html>

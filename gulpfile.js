@@ -15,5 +15,9 @@ require('laravel-elixir-vue-2');
 
 elixir((mix) => {
     mix.sass('app.scss')
-       .webpack('app.js');
+       .webpack('app.js')
+        .copy('/node_modules/isotope-layout/dist/isotope.pkgd.min.js', 'resources/js/libs/isotope.min.js')
+        .scripts([
+            '/js/libs/isotope.min.js'
+        ], './public/js/libs.js');
 });
