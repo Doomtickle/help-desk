@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="container">
-        <div class="form-group form-inline">
+        <div class="form-group form-inline button-group">
             <input type="text" name="quicksearch" class="quicksearch form-control" data-filter=".quicksearch" placeholder="Search" />
         </div>
-        <div class="button-group filter-button-group">
-            <button class="btn btn-info" data-filter="*">Show All</button>
-            <button class="btn btn-info" data-filter=".complete">Complete</button>
-            <button class="btn btn-info" data-filter=".incomplete">Incomplete</button>
+        <div id="filters" class="button-group">
+            <button class="button is-checked" data-filter="*">Show All</button>
+            <button class="button" data-filter=".complete">Complete</button>
+            <button class="button" data-filter=".incomplete">Incomplete</button>
         </div>
     </div>
     <div class="container">
@@ -41,21 +41,41 @@
     <script>
         // quick search regex
         var qsRegex;
+        var buttonFilter;
 
+        // init Isotope
         var $grid = $('.grid').isotope({
-          // set itemSelector so .grid-sizer is not used in layout
-          itemSelector: '.grid-item',
-          columnWidth: '.grid-sizer',
-          layoutMode: 'fitRows',
+            itemSelector: '.grid-item',
+            layoutMode: 'fitRows',
             filter: function() {
-                return qsRegex ? $(this).text().match( qsRegex ) : true;
+                var $this = $(this);
+                var searchResult = qsRegex ? $this.text().match( qsRegex ) : true;
+                var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
+                return searchResult && buttonResult;
             }
         });
-        // use value of search field to filter
-        var $quicksearch = $('.quicksearch').keyup(debounce(function () {
-            qsRegex = new RegExp($quicksearch.val(), 'gi');
+
+        $('#filters').on( 'click', 'button', function() {
+            buttonFilter = $( this ).attr('data-filter');
             $grid.isotope();
-        }, 200));
+        });
+
+        // use value of search field to filter
+        var $quicksearch = $('.quicksearch').keyup( debounce( function() {
+            qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+            $grid.isotope();
+        }) );
+
+
+        // change is-checked class on buttons
+        $('.button-group').each( function( i, buttonGroup ) {
+            var $buttonGroup = $( buttonGroup );
+            $buttonGroup.on( 'click', 'button', function() {
+                $buttonGroup.find('.is-checked').removeClass('is-checked');
+                $( this ).addClass('is-checked');
+            });
+        });
+
 
         // debounce so filtering doesn't happen every millisecond
         function debounce( fn, threshold ) {
@@ -68,17 +88,8 @@
                     fn();
                     timeout = null;
                 }
-                timeout = setTimeout( delayed, threshold || 100 );
-            }
+                setTimeout( delayed, threshold || 100 );
+            };
         }
-        var $grid = $('.grid').isotope({
-            // options
-        });
-        // filter items on button click
-        $('.filter-button-group').on( 'click', 'button', function() {
-            var filterValue = $(this).attr('data-filter');
-            $grid.isotope({ filter: filterValue });
-        });
-
     </script>
 @stop
