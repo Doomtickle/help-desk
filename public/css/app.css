@@ -7708,10 +7708,11 @@ button.close {
   background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.2));
   background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2));
   color: #222;
-  font-family: sans-serif;
+  font-family: Raleway, sans-serif;
   font-size: 16px;
   text-shadow: 0 1px white;
   cursor: pointer;
+  margin-bottom: 30px;
 }
 
 .button:hover {

@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container">
-        <div class="form-group form-inline button-group">
+        <div class="form-group col-md-5 button-group">
             <input type="text" name="quicksearch" class="quicksearch form-control" data-filter=".quicksearch" placeholder="Search" />
         </div>
-        <div id="filters" class="button-group">
+        <div id="filters" class="button-group col-md-offset-2 col-md-5">
             <button class="button is-checked" data-filter="*">Show All</button>
             <button class="button" data-filter=".complete">Complete</button>
             <button class="button" data-filter=".incomplete">Incomplete</button>
