@@ -1,4 +1,3 @@
-
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Heebo:100,400,700);
 
@@ -18,15 +17,65 @@ body{
     font-family:Heebo, sans-serif;
     font-weight:100;
     font-size:18px;
+    color:#f5f5f5;
+}
+.main-footer,
+.content-wrapper{
+    background: #29323c;
+}
+body a{
+    font-weight:400;
 }
 .box-body li{
     font-weight:400;
     color:#000;
 }
+strong{
+    font-weight:700;
+}
+#title, 
 .quicksearch{
-    height:45px;
-    color:#333;
-    font-size:18px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    height:70px;
+    color:#FFF;
+    font-size:38px;
+    background:transparent;
+    box-shadow:0;
+}
+#description{
+    background:transparent;
+    font-size:22px;
+    color:#fff;
+}
+.select2-results,
+.select2-search_field,
+.select2-selection{
+    background:transparent !important;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff; 
+    line-height: 40px;
+    font-weight: 400;
+}
+.select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
+    height: 45px;
+    background:#29323c;
+}
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    border: 1px solid #aaa;
+    background: #29323c;
+}
+.select2-container--default .select2-results>.select2-results__options {
+    background: #29323c;
+    font-weight: 400;
+}
+.select2-search--dropdown{
+    background:#29323c;
+}
+.form-control:focus{
+    box-shadow:none;
 }
 .grid-sizer,
 .grid-item{
@@ -41,25 +90,24 @@ body{
 .button {
     display: inline-block;
     padding: 0.5em 1.0em;
-    background: #EEE;
+    background: transparent;
     border: none;
-    border-radius: 7px;
+    font-weight:400;
     background-image: linear-gradient( to bottom, hsla(0, 0%, 0%, 0), hsla(0, 0%, 0%, 0.2) );
-    color: #222;
+    color: #fff;
     text-shadow: 0 1px white;
     cursor: pointer;
     margin-bottom:30px;
 }
-
 .button:hover {
-    background-color: #8CF;
+    background-color: #FFF;
     text-shadow: 0 1px hsla(0, 0%, 100%, 0.5);
-    color: #222;
+    color: #333;
 }
 
 .button:active,
 .button.is-checked {
-    background-color: #28F;
+    background-color: #3A6073;
 }
 
 .button.is-checked {
@@ -86,5 +134,23 @@ body{
     margin-right: 1px;
 }
 
-.button-group .button:first-child { border-radius: 0.5em 0 0 0.5em; }
-.button-group .button:last-child { border-radius: 0 0.5em 0.5em 0; }
+.main-header > .logo{
+    padding-bottom:60px;
+}
+.user-panel{
+    padding-top:30px;
+}
+.box{
+    background:#f5f8fa;
+}
+.box.box-success{
+    border-top: 10px solid #006400;
+}
+.box.box-danger{
+    border-top: 10px solid #dd4b39;
+}
+.main-footer{
+    color:#fff;
+    font-weight:100;
+    font-size:15px;
+}
