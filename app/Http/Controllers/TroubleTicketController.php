@@ -44,7 +44,7 @@ class TroubleTicketController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        $troubleTicket = TroubleTicket::create($request->all());
+        $troubleTicket          = TroubleTicket::create($request->all());
         $troubleTicket->user_id = \Auth::user()->id;
         $troubleTicket->save();
 
@@ -61,7 +61,7 @@ class TroubleTicketController extends Controller
      */
     public function show($id)
     {
-        $tt = TroubleTicket::ticketInfo($id);
+        $tt        = TroubleTicket::ticketInfo($id);
         $companies = Company::all();
 
         return view('troubletickets.show', compact('tt', 'companies'));
@@ -103,4 +103,15 @@ class TroubleTicketController extends Controller
     {
         //
     }
+
+    public function markComplete(TroubleTicket $ticket)
+    {
+        $ticket->complete = true;
+        $ticket->status   = 'Complete';
+        $ticket->save();
+
+        return back();
+
+    }
+    
 }

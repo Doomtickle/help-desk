@@ -1,11 +1,9 @@
-@extends ('layouts.app')
+@extends('adminlte::layouts.app')
 
-@section('content')
+@section('main-content')
     <div class="container">
-        <div class="jumbotron">
-              <h1>This is where we'll edit a ticket.</h1>
-              @include('forms.editTicket')
-        </div>
+          <h1>This is where we'll edit a ticket.</h1>
+          @include('forms.editTicket')
     </div>
 @stop
 @section('scripts.footer')

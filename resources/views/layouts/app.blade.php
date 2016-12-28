@@ -23,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-inverse navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -55,7 +55,7 @@
                             <li><a href="{{ url('/register') }}">Register</a></li>
                         @else
                         <li>
-                            <a style="color:red; height:80%;" href="{{ url('/ticket/create') }}" class="btn btn-default">New Ticket</a>
+                            <a style="color:#fff;height:80%;" href="{{ url('/ticket/create') }}" class="btn btn-danger">New Ticket</a>
                         </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

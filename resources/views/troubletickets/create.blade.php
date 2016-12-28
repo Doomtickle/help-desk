@@ -1,12 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::layouts.app')
 
-@section('content')
+@section('main-content')
     <div class="container">
-        <div class="col-md-offset-3 col-md-6">
-            <div class="jumbotron">
-                <h1>New Ticket</h1>
-                @include('forms.createTicket')
-            </div>
+        <div class="col-md-6">
+            <h1>New Ticket</h1>
+            @include('forms.createTicket')
         </div>
     </div>
 @stop
