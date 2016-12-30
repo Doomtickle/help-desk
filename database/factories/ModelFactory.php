@@ -34,6 +34,7 @@ $factory->define(App\TroubleTicket::class, function (Faker\Generator $faker) {
         'user_id'     => 1,
         'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
         'website'     => $company,
+        'priority'    => $faker->numberBetween($min = 1, $max = 3),
         'complete'    => $faker->boolean($chanceOfGettingTrue = 50)
     ];
 

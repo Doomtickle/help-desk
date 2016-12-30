@@ -2,7 +2,8 @@
     <script>
 // quick search regex
 var qsRegex;
-var buttonFilter;
+var statusButtonFilter;
+var priorityButtonFilter;
 
 // init Isotope
 var $grid = $('.grid').isotope({
@@ -11,13 +12,18 @@ var $grid = $('.grid').isotope({
     filter: function() {
         var $this = $(this);
         var searchResult = qsRegex ? $this.text().match( qsRegex ) : true;
-        var buttonResult = buttonFilter ? $this.is( buttonFilter ) : true;
-        return searchResult && buttonResult;
+        var statusButtonResult = statusButtonFilter ? $this.is( statusButtonFilter ) : true;
+        var priorityButtonResult = priorityButtonFilter ? $this.is( priorityButtonFilter ) : true;
+        return searchResult && statusButtonResult && priorityButtonResult;
     }
 });
 
-$('#filters').on( 'click', 'button', function() {
-    buttonFilter = $( this ).attr('data-filter');
+$('#status-filters').on( 'click', 'button', function() {
+    statusButtonFilter = $( this ).attr('data-filter');
+    $grid.isotope();
+});
+$('#priority-filters').on( 'click', 'button', function() {
+    priorityButtonFilter = $( this ).attr('data-filter');
     $grid.isotope();
 });
 

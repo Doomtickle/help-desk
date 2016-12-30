@@ -1,11 +1,23 @@
     <div class="container">
-        <div class="form-group col-md-5 button-group">
-            <input type="text" name="quicksearch" class="quicksearch form-control" data-filter=".quicksearch" placeholder="Search" autofocus />
+        <div class="row">
+            <div class="form-group col-md-5 button-group">
+                <input type="text" name="quicksearch" class="quicksearch form-control" data-filter=".quicksearch" placeholder="Search" autofocus />
+            </div>
         </div>
-        <div id="filters" class="button-group col-md-offset-2 col-md-5">
-            <button class="button is-checked" data-filter="*">Show All</button>
-            <button class="button" data-filter=".incomplete">Incomplete</button>
-            <button class="button" data-filter=".complete">Complete</button>
+        <div class="row">
+            <div id="status-filters" class="button-group col-md-5">
+                <h3>Status</h3>
+                <button class="button is-checked" data-filter="*">Show All</button>
+                <button class="button" data-filter=".incomplete">Incomplete</button>
+                <button class="button" data-filter=".complete">Complete</button>
+            </div>
+            <div id="priority-filters" class="button-group col-md-5">
+                <h3>Priority</h3>
+                <button class="button is-checked" data-filter="*">Show All</button>
+                <button class="button" data-filter=".priority-1">Priority 1</button>
+                <button class="button" data-filter=".priority-2">Priority 2</button>
+                <button class="button" data-filter=".priority-3">Priority 3</button>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -13,7 +25,7 @@
             <div class="row">
                 <div class="grid-sizer"></div>
                 @foreach($tickets as $tt)
-                    <div class="grid-item{{ $tt->complete ? ' complete' : ' incomplete' }} {{ str_replace('.', '-', $tt->website) }}" data-category="{{ str_replace('.', '-', $tt->website) }}">
+                    <div class="grid-item{{ $tt->complete ? ' complete' : ' incomplete' }} priority-{{ $tt->priority }} {{ str_replace('.', '-', $tt->website) }}" data-category="{{ str_replace('.', '-', $tt->website) }}">
                         <div class="box box-{{$tt->complete ? 'success' : 'danger'}} {{$tt->status == 'On Hold' ? 'on-hold': ''}}">
                             <div class="box-header with-border">
                                 <div class="box-title">
