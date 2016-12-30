@@ -35,9 +35,11 @@
                                 <form action="/complete/{{ $tt->id }}" method="post">
                                     {{ method_field('PATCH') }}
                                     {{ csrf_field() }}
-                                   <div class="form-group">
-                                       <button type="submit" class="btn btn-danger btn-full-width">Mark Complete</button>
-                                   </div> 
+                                    @unless($tt->complete)
+                                       <div class="form-group">
+                                           <button type="submit" class="btn btn-danger btn-full-width">Mark Complete</button>
+                                       </div> 
+                                   @endunless
                                 </form>
                             </div>
                         </div>

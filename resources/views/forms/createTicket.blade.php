@@ -17,6 +17,13 @@
       </select>
   </div>
   <div class="form-group">
+      <label for="priority">Priority</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="1"> 1</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="2"> 2</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="3"> 3</label>
+  </div>
+      
+  <div class="form-group">
       <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>
