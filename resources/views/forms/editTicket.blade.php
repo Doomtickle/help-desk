@@ -21,10 +21,16 @@
       </select>
   </div>
   <div class="form-group">
-      <label for="priority">Priority</label>
-      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="1"> 1</label>
-      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="2"> 2</label>
-      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="3"> 3</label>
+      <label for="status">Status:</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="status" id="pending" value="Pending" > Pending</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="status" id="on-hold" value="On Hold"> On Hold</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="status" id="complete" value="Complete"> Complete</label>
+  </div>
+  <div class="form-group">
+      <label for="priority">Priority:</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="priority" id="priority-1" value="1" > 1</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="priority" id="priority-2" value="2"> 2</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="priority" id="priority-3" value="3"> 3</label>
   </div>
       
   <div class="form-group">

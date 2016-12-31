@@ -10,6 +10,7 @@
                 <button class="button is-checked" data-filter="*">Show All</button>
                 <button class="button" data-filter=".incomplete">Incomplete</button>
                 <button class="button" data-filter=".complete">Complete</button>
+                <button class="button" data-filter=".on-hold">On hold</button>
             </div>
             <div id="priority-filters" class="button-group col-md-5">
                 <h3>Priority</h3>
@@ -25,8 +26,8 @@
             <div class="row">
                 <div class="grid-sizer"></div>
                 @foreach($tickets as $tt)
-                    <div class="grid-item{{ $tt->complete ? ' complete' : ' incomplete' }} priority-{{ $tt->priority }} {{ str_replace('.', '-', $tt->website) }}" data-category="{{ str_replace('.', '-', $tt->website) }}">
-                        <div class="box box-{{$tt->complete ? 'success' : 'danger'}} {{$tt->status == 'On Hold' ? 'on-hold': ''}}">
+                    <div class="grid-item{{ $tt->complete ? ' complete' : ' incomplete' }} priority-{{ $tt->priority }} {{$tt->status == 'On Hold' ? 'on-hold': ''}} {{ str_replace('.', '-', $tt->website) }}" data-category="{{ str_replace('.', '-', $tt->website) }}">
+                        <div class="box box-{{$tt->complete ? 'success' : 'danger'}}">
                             <div class="box-header with-border">
                                 <div class="box-title">
                                     <h3>
@@ -40,19 +41,19 @@
                                     <li class="list-group-item"><strong>Title: </strong> {{ $tt->title }}</li>
                                     <li class="list-group-item"><strong>Description:</strong> {{ $tt->description }}</li>
                                     <li class="list-group-item"><strong>Status:</strong> {{ $tt->status }} </li>
-                                    <li class="list-group-item"><strong>Priority</strong> {{ $tt->priority }}</li>
+                                    <li class="list-group-item"><strong>Priority:</strong> {{ $tt->priority }}</li>
                                     <li class="list-group-item"><strong>Created:</strong> {{ $tt->created_at->diffForHumans() }}</li>
                                 </ul>
                                 <a href="/ticket/{{ $tt->id }}/edit" class="btn btn-info btn-full-width">Edit this ticket</a>
-                                <form action="/complete/{{ $tt->id }}" method="post">
-                                    {{ method_field('PATCH') }}
-                                    {{ csrf_field() }}
-                                    @unless($tt->complete)
-                                       <div class="form-group">
-                                           <button type="submit" class="btn btn-danger btn-full-width">Mark Complete</button>
-                                       </div> 
-                                   @endunless
-                                </form>
+                                @unless($tt->complete)
+                                    <form action="/complete/{{ $tt->id }}" method="post">
+                                        {{ method_field('PATCH') }}
+                                        {{ csrf_field() }}
+                                           <div class="form-group">
+                                               <button type="submit" class="btn btn-danger btn-full-width">Mark Complete</button>
+                                           </div> 
+                                    </form>
+                               @endunless
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TroubleTicket;
+use App\Http\Controllers\TroubleTicketController;
 use App\Utilities\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -89,6 +90,8 @@ class TroubleTicketController extends Controller
     public function update(Request $request, TroubleTicket $ticket)
     {
         $ticket->update($request->all());
+        if($ticket->status == 'Complete')
+            $this->markComplete($ticket);
 
         return back();
     }
