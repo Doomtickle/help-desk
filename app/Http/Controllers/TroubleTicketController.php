@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\TroubleTicket;
-use App\Http\Controllers\TroubleTicketController;
 use App\Utilities\Company;
 use Illuminate\Http\Request;
+use App\Notifications\TicketCreated;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Controllers\TroubleTicketController;
 
 class TroubleTicketController extends Controller
 {
@@ -45,9 +47,12 @@ class TroubleTicketController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        $troubleTicket          = TroubleTicket::create($request->all());
+        $admin = User::find(1);
+        $troubleTicket     = TroubleTicket::create($request->all());
         $troubleTicket->user_id = \Auth::user()->id;
         $troubleTicket->save();
+
+        $admin->notify(new TicketCreated($troubleTicket));
 
         return Redirect::to('/ticket/' . $troubleTicket->id);
     }
