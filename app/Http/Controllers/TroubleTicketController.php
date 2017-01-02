@@ -7,15 +7,27 @@ use App\TroubleTicket;
 use App\Utilities\Company;
 use Illuminate\Http\Request;
 use App\Notifications\TicketCreated;
+use App\Notifications\TicketUpdated;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\TroubleTicketController;
 
 class TroubleTicketController extends Controller
 {
+    
     protected $user_id;
     protected $status;
     protected $complete;
 
+    /**
+     * __construct
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+            
+    }
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +58,6 @@ class TroubleTicketController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $admin = User::find(1);
         $troubleTicket     = TroubleTicket::create($request->all());
         $troubleTicket->user_id = \Auth::user()->id;
@@ -94,10 +105,24 @@ class TroubleTicketController extends Controller
      */
     public function update(Request $request, TroubleTicket $ticket)
     {
-        $ticket->update($request->all());
-        if($ticket->status == 'Complete')
-            $this->markComplete($ticket);
-
+        $admin = User::find(1);
+        foreach($request->all() as $key => $value){
+            if($key === '_token' || $key === '_method') { continue; }
+            $ticket->$key = $value;
+            if($ticket->isDirty()){
+                foreach($ticket->getDirty() as $column => $data){
+                    $changed[$column] = $data; 
+                }
+            }
+        }
+        if ($changed){
+            foreach($changed as $key => $value){
+                $changedItem = [$key => $value];
+                $admin->notify(new TicketUpdated($ticket, $changedItem));
+            }
+        }
+        $ticket->updateStatus();
+        $ticket->save();
         return back();
     }
 
@@ -111,15 +136,14 @@ class TroubleTicketController extends Controller
     {
         //
     }
-
     public function markComplete(TroubleTicket $ticket)
     {
-        $ticket->complete = true;
-        $ticket->status   = 'Complete';
-        $ticket->save();
+        $ticket->markComplete();
 
         return back();
-
     }
+    
+
+    
     
 }

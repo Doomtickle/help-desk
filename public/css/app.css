@@ -15451,6 +15451,10 @@ body {
   height: 55px;
 }
 
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a, .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a, .navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li > a {
+  white-space: normal;
+}
+
 .sidebar-menu.header {
   color: #efefef;
 }
@@ -15472,6 +15476,7 @@ body {
 
 .skin-black .main-header .navbar .navbar-custom-menu .navbar-nav > li > a, .skin-black .main-header .navbar .navbar-right > li > a {
   color: #efefef;
+  padding-top: 19px;
 }
 
 body a {

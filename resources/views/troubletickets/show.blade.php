@@ -1,6 +1,11 @@
 @extends('adminlte::layouts.app')
-
 @section ('main-content')
+    @php
+        if($_GET){
+        $notification = Auth::user()->notifications->where('id', $_GET['mark'])->first();
+        $notification->markAsRead();
+        }
+    @endphp
     <div class="container">
         <div class="col-md-offset-3 col-md-6">
             <div class="box box-{{$tt->complete ? 'success' : 'danger'}} {{$tt->status == 'On Hold' ? 'on-hold': ''}}">

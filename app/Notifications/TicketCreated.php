@@ -2,13 +2,14 @@
 
 namespace App\Notifications;
 
+use App\User;
 use App\TroubleTicket;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class TicketCreated extends Notification
+class TicketCreated extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -31,7 +32,7 @@ class TicketCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -56,8 +57,11 @@ class TicketCreated extends Notification
      */
     public function toArray($notifiable)
     {
+        $creator = User::find($this->ticket->user_id);
+
         return [
-            //
+            'message' => $creator->name . ' created a ticket for ' . $this->ticket->website,
+            'ticketId' => $this->ticket->id, 
         ];
     }
 }

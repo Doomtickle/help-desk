@@ -24,56 +24,27 @@
                     <!-- Menu toggle button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <i class="fa fa-bell-o"></i>
-                        <span class="label label-warning">10</span>
+                        <span class="label label-warning">{{ Auth::user()->unreadNotifications->count() }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">{{ trans('adminlte_lang::message.notifications') }}</li>
+                        <li class="header">You have {{ Auth::user()->unreadNotifications->count() }} new notifications</li>
                         <li>
                             <!-- Inner Menu: contains the notifications -->
-                            <ul class="menu">
-                                <li><!-- start notification -->
-                                    <a href="#">
-                                        <i class="fa fa-users text-aqua"></i> {{ trans('adminlte_lang::message.newmembers') }}
-                                    </a>
-                                </li><!-- end notification -->
+                            <ul class="menu" class="list-group">
+                                @foreach(Auth::user()->notifications as $notification)
+                                    <li class="list-group-item" style="white-space:normal;"><!-- start notification -->
+                                        <a href="/ticket/{{ $notification->data['ticketId'] }}?mark={{ $notification->id }}">
+                                            @if($notification->read_at==NULL)
+                                                <strong>{{ $notification->data['message'] }}</strong>
+                                            @else
+                                                {{ $notification->data['message'] }}
+                                            @endif
+                                        </a>
+                                    </li><!-- end notification -->
+                                @endforeach
                             </ul>
                         </li>
                         <li class="footer"><a href="#">{{ trans('adminlte_lang::message.viewall') }}</a></li>
-                    </ul>
-                </li>
-                <!-- Tasks Menu -->
-                <li class="dropdown tasks-menu">
-                    <!-- Menu Toggle Button -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-flag-o"></i>
-                        <span class="label label-danger">9</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li class="header">{{ trans('adminlte_lang::message.tasks') }}</li>
-                        <li>
-                            <!-- Inner menu: contains the tasks -->
-                            <ul class="menu">
-                                <li><!-- Task item -->
-                                    <a href="#">
-                                        <!-- Task title and progress text -->
-                                        <h3>
-                                            {{ trans('adminlte_lang::message.tasks') }}
-                                            <small class="pull-right">20%</small>
-                                        </h3>
-                                        <!-- The progress bar -->
-                                        <div class="progress xs">
-                                            <!-- Change the css width attribute to simulate progress -->
-                                            <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">20% {{ trans('adminlte_lang::message.complete') }}</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </li><!-- end task item -->
-                            </ul>
-                        </li>
-                        <li class="footer">
-                            <a href="#">{{ trans('adminlte_lang::message.alltasks') }}</a>
-                        </li>
                     </ul>
                 </li>
                 @if (Auth::guest())
