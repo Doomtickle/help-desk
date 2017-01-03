@@ -17,8 +17,7 @@ class TroubleTicketController extends Controller
     
     protected $user_id;
     protected $status;
-    protected $complete;
-
+    protected $complete; 
     /**
      * __construct
      * 
@@ -36,7 +35,7 @@ class TroubleTicketController extends Controller
      */
     public function index()
     {
-        $tickets = TroubleTicket::all();
+        $tickets = TroubleTicket::orderBy('created_at', 'desc')->get();
 
         return view('troubletickets.index', compact('tickets'));
     }
@@ -66,7 +65,7 @@ class TroubleTicketController extends Controller
 
         $admin->notify(new TicketCreated($troubleTicket));
 
-        return Redirect::to('/ticket/' . $troubleTicket->id);
+        return Redirect::to('/home');
     }
 
     /**

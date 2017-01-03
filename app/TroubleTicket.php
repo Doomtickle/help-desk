@@ -43,7 +43,10 @@ class TroubleTicket extends Model
 
         //ticket isn't complete so we'll mark it as such
         $this->complete = false;
-        //save the ticket
+
+        //remove the created_at timestamp if it exists
+        if($this->completed_at)
+            $this->completed_at = null;
 
     }
     /**
@@ -57,6 +60,7 @@ class TroubleTicket extends Model
 
         $this->complete = true;
         $this->status   = 'Complete';
+        $this->completed_at = \Carbon\Carbon::now();
         $changes = [
             'status' => 'Complete'
         ];

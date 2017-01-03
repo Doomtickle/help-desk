@@ -9,6 +9,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\TroubleTicket;
 
 /**
  * Class HomeController
@@ -33,6 +34,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('adminlte::home');
+        $tickets = TroubleTicket::orderBy('created_at', 'desc')->get();
+        return view('adminlte::home', compact('tickets'));
     }
 }

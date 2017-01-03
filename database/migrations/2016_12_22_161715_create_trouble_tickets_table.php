@@ -22,6 +22,7 @@ class CreateTroubleTicketsTable extends Migration
             $table->integer('priority');
             $table->string('status')->default('Pending');
             $table->boolean('complete')->default(false);
+            $table->dateTime('completed_at')->nullable();
             $table->timestamps();
         });
     }
