@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Notifications\TicketCreated;
 use App\Notifications\TicketUpdated;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\TroubleTicketRequest;
 use App\Http\Controllers\TroubleTicketController;
 
 class TroubleTicketController extends Controller
@@ -56,7 +57,7 @@ class TroubleTicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TroubleTicketRequest $request)
     {
         $admin = User::find(1);
         $troubleTicket     = TroubleTicket::create($request->all());
@@ -103,23 +104,15 @@ class TroubleTicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, TroubleTicket $ticket)
+    public function update(TroubleTicketRequest $request, TroubleTicket $ticket)
     {
-        $admin = User::find(1);
         foreach($request->all() as $key => $value){
             if($key === '_token' || $key === '_method') { continue; }
             $ticket->$key = $value;
-            if($ticket->isDirty()){
-                foreach($ticket->getDirty() as $column => $data){
-                    $changed[$column] = $data; 
-                }
-            }
+            $changes = $ticket->changes();
         }
-        if ($changed){
-            foreach($changed as $key => $value){
-                $changedItem = [$key => $value];
-                $admin->notify(new TicketUpdated($ticket, $changedItem));
-            }
+        if ($changes){
+            $this->sendUpdateNotifications($ticket, $changes);
         }
         $ticket->updateStatus();
         $ticket->save();
@@ -138,12 +131,21 @@ class TroubleTicketController extends Controller
     }
     public function markComplete(TroubleTicket $ticket)
     {
-        $ticket->markComplete();
+        $changes = $ticket->markComplete();
+        $this->sendUpdateNotifications($ticket, $changes);
+        $ticket->save();
 
         return back();
     }
     
+    public function sendUpdateNotifications(TroubleTicket $ticket, $changes)
+    {
+        $admin = User::find(1);
 
-    
+        foreach($changes as $key => $value){
+            $changedItem = [$key => $value];
+            $admin->notify(new TicketUpdated($ticket, $changedItem));
+        }
+    }
     
 }

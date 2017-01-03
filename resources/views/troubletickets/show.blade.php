@@ -26,13 +26,15 @@
                         <li class="list-group-item"><strong>Created:</strong> {{ $tt->created_at->diffForHumans() }}</li>
                     </ul>
                     <a href="/ticket/{{ $tt->id }}/edit" class="btn btn-info btn-full-width">Edit this ticket</a>
-                    <form action="/complete/{{ $tt->id }}" method="post">
-                        {{ method_field('PATCH') }}
-                        {{ csrf_field() }}
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-danger btn-full-width">Mark Complete</button>
-                        </div> 
-                    </form>
+                    @unless($tt->complete)
+                        <form action="/complete/{{ $tt->id }}" method="post">
+                            {{ method_field('PATCH') }}
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger btn-full-width">Mark Complete</button>
+                            </div> 
+                        </form>
+                    @endunless
                 </div>
             </div>
         </div>

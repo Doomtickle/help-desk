@@ -66,7 +66,7 @@ class TicketUpdated extends Notification implements ShouldQueue
             $this->changed[$key] = $value;
 
         return [
-            'message' => $creator->name . ' updated the ' . $key . ' on ' . $this->ticket->website . ' to ' . $value,
+            'message' => $creator->name . ' updated the ' . $key . ' of Ticket #' . $this->ticket->id . ' to ' . $value,
             'ticketId' => $this->ticket->id,
         ];
     }

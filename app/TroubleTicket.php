@@ -3,6 +3,7 @@
 namespace App;
 
 use App\User;
+use App\Notifications\TicketUpdated;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -46,15 +47,35 @@ class TroubleTicket extends Model
 
     }
     /**
-     * markComplete
+     * Mark the ticket complete
      *
      * @param TroubleTicket $ticket
      */
     public function markComplete()
     {
+        $admin = User::find(1);
+
         $this->complete = true;
         $this->status   = 'Complete';
+        $changes = [
+            'status' => 'Complete'
+        ];
+
+        return $changes;
 
     }
-    
+
+    /**
+     * Determine if there are any changes and return the changed k/v pairs
+     *
+     * @return Array $changed
+     */
+    public function changes()
+    {
+        if($this->isDirty()){
+            foreach($this->getDirty() as $column => $data)
+                $changed[$column] = $data; 
+            return $changed;
+        }
+    }
 }

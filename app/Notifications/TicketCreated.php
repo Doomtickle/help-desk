@@ -44,7 +44,7 @@ class TicketCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('A new ticket has been created for:' . $this->ticket->website)
+                    ->subject('A new ticket has been created for ' . $this->ticket->website)
                     ->line('Description: ' . $this->ticket->description)
                     ->action('View Ticket', 'http://helpdesk.dev');
     }

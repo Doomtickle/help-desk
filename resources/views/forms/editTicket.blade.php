@@ -1,4 +1,13 @@
 <form method="POST" action="/ticket/{{ $ticket->id }}">
+    @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
   {{ csrf_field() }}
   {{ method_field('patch') }}
   <div class="form-group">

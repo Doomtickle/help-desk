@@ -27,11 +27,13 @@
                         <span class="label label-warning">{{ Auth::user()->unreadNotifications->count() }}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have {{ Auth::user()->unreadNotifications->count() }} new notifications</li>
+                        <li class="header">
+                            You have {{ Auth::user()->unreadNotifications->count() }} new notifications
+                        </li>
                         <li>
                             <!-- Inner Menu: contains the notifications -->
                             <ul class="menu" class="list-group">
-                                @foreach(Auth::user()->notifications as $notification)
+                                @foreach(Auth::user()->notifications->take(10) as $notification)
                                     <li class="list-group-item" style="white-space:normal;"><!-- start notification -->
                                         <a href="/ticket/{{ $notification->data['ticketId'] }}?mark={{ $notification->id }}">
                                             @if($notification->read_at==NULL)
@@ -44,7 +46,9 @@
                                 @endforeach
                             </ul>
                         </li>
-                        <li class="footer"><a href="#">{{ trans('adminlte_lang::message.viewall') }}</a></li>
+                        <li class="footer list-group-item" style="text-align:center;">
+                            <small><a href="/notifications/readall">Mark all as read</a></small>
+                        </li>
                     </ul>
                 </li>
                 @if (Auth::guest())
