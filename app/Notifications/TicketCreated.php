@@ -46,7 +46,7 @@ class TicketCreated extends Notification implements ShouldQueue
         return (new MailMessage)
                     ->subject('A new ticket has been created for ' . $this->ticket->website)
                     ->line('Description: ' . $this->ticket->description)
-                    ->action('View Ticket', 'http://helpdesk.dev');
+                    ->action('View Ticket', 'http://helpdesk.kerigan.com/ticket/' . $this->ticket->id);
     }
 
     /**

@@ -37,9 +37,9 @@
                                     <li class="list-group-item" style="white-space:normal;"><!-- start notification -->
                                         <a href="/ticket/{{ $notification->data['ticketId'] }}?mark={{ $notification->id }}">
                                             @if($notification->read_at==NULL)
-                                                <strong>{{ $notification->data['message'] }}</strong>
+                                                <strong>{{ $notification->data['message'] }} <span class="pull-right">{{ $notification->created_at->diffForHumans() }}</span></strong>
                                             @else
-                                                {{ $notification->data['message'] }}
+                                                {{ $notification->data['message'] }} <span class="pull-right">{{ $notification->created_at->diffForHumans() }}</span>
                                             @endif
                                         </a>
                                     </li><!-- end notification -->
