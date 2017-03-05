@@ -67,9 +67,10 @@ class TroubleTicketController extends Controller
         if($request->file('files')){
 
             $files = $request->file('files');
+            $i = 0;
             foreach($files as $file){
-                $name = $file->getClientOriginalName();
-                $path = Storage::url($file->store('SupportingDocs'));
+                $name = $file[$i]->getClientOriginalName();
+                $path = Storage::url($file[$i]->store('SupportingDocs'));
 
                 
                 $supportFile = SupportFile::create([
@@ -77,6 +78,8 @@ class TroubleTicketController extends Controller
                                 'path' => $path,
                                 'original_name' => $name,
                 ]);
+
+                $i++;
             }
 
         }

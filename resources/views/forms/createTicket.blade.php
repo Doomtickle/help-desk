@@ -1,4 +1,4 @@
-<form method="POST" action="/ticket" enctype="multipart/form-data">
+<form method="POST" action="/ticket" enctype="multipart/form-data" class="dropzone" id="create-ticket">
     @if (count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -32,10 +32,8 @@
       <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="3"> 3</label>
   </div>
 
-  <div class="form-group">
-      <input type="file" name="files[]" class="form-control" id="fileUpload" multiple="multiple"/>
-  </div>
-      
+  <div class="dropzone-previews"></div>
+
   <div class="form-group">
       <button type="submit" class="btn btn-primary">Submit</button>
   </div>
