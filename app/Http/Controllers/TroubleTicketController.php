@@ -123,7 +123,8 @@ class TroubleTicketController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Http\Requests\TroubleTicketRequest $request
+     * @param  App\TroubleTicket $Ticket
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -152,6 +153,14 @@ class TroubleTicketController extends Controller
     {
         //
     }
+
+
+    /**
+     * Mark a ticket complete
+     *
+     * @param  App\TroubleTicket $ticket
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function markComplete(TroubleTicket $ticket)
     {
         $changes = $ticket->markComplete();
@@ -160,7 +169,14 @@ class TroubleTicketController extends Controller
 
         return back();
     }
-    
+
+    /**
+     * Checks to see if a ticket has been updated and sends a notification 
+     * to the admins
+     *
+     * @param  App\TroubleTicket $ticket
+     * @param  array $changes
+     */
     public function sendUpdateNotifications(TroubleTicket $ticket, $changes)
     {
         $admin = User::find(1);
