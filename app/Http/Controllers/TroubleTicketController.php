@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\SupportFile;
 use App\TroubleTicket;
 use App\Utilities\Company;
 use Illuminate\Http\Request;
 use App\Notifications\TicketCreated;
 use App\Notifications\TicketUpdated;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\TroubleTicketRequest;
 use App\Http\Controllers\TroubleTicketController;
@@ -58,10 +60,29 @@ class TroubleTicketController extends Controller
      */
     public function store(TroubleTicketRequest $request)
     {
-        $admin = User::find(1);
-        $troubleTicket     = TroubleTicket::create($request->all());
+        $admin                  = User::find(1);
+        $troubleTicket          = TroubleTicket::create($request->all());
         $troubleTicket->user_id = \Auth::user()->id;
+
+        if($request->file('files')){
+
+            $files = $request->file('files');
+            foreach($files as $file){
+                $name = $file->getClientOriginalName();
+                $path = Storage::url($file->store('SupportingDocs'));
+
+                
+                $supportFile = SupportFile::create([
+                                'trouble_ticket_id' => $troubleTicket->id,
+                                'path' => $path,
+                                'original_name' => $name,
+                ]);
+            }
+
+        }
+
         $troubleTicket->save();
+
 
         $admin->notify(new TicketCreated($troubleTicket));
 

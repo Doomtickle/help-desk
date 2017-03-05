@@ -25,6 +25,11 @@ class TroubleTicket extends Model
        return $this->belongsTo(User::class);     
     }
 
+    public function supportingFiles()
+    {
+        return $this->hasMany(SupportFile::class);
+    }
+
     public static function ticketInfo($id)
     {
         return static::where(compact('id'))->with('user')->first();

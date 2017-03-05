@@ -26,7 +26,8 @@ class TroubleTicketRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'required', 
-            'website' => 'required'
+            'priority' => 'required',
+            'website' => 'required',
         ];
     }
 }
