@@ -37,7 +37,7 @@ class TroubleTicketController extends Controller
      */
     public function index()
     {
-        $tickets = TroubleTicket::orderBy('created_at', 'desc')->get();
+        $tickets = TroubleTicket::with('supportingFiles')->orderBy('created_at', 'desc')->get();
 
         return view('troubletickets.index', compact('tickets'));
     }
@@ -70,7 +70,7 @@ class TroubleTicketController extends Controller
             $i = 0;
             foreach($files as $file){
                 $name = $file[$i]->getClientOriginalName();
-                $path = Storage::url($file[$i]->store('SupportingDocs'));
+                $path = $file[$i]->store('SupportingDocs', 'public');
 
                 
                 $supportFile = SupportFile::create([

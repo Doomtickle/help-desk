@@ -43,6 +43,16 @@
                                     <li class="list-group-item"><strong>Status:</strong> {{ $tt->status }} </li>
                                     <li class="list-group-item"><strong>Priority:</strong> {{ $tt->priority }}</li>
                                     <li class="list-group-item"><strong>Created:</strong> {{ $tt->created_at->diffForHumans() }}</li>
+                                    @if($tt->supportingFiles->count())
+                                    <li class="list-group-item"><strong>Attachments:</strong>
+                                    <dl>
+                                        @foreach($tt->supportingFiles as $sf)
+
+                                            <li class="list-group-item no-border"><a href="{{ asset($sf->path) }}">{{ $sf->original_name }}</a></li>
+                                        @endforeach
+                                    </dl>
+                                    </li>
+                                    @endif
                                 </ul>
                                 <a href="/ticket/{{ $tt->id }}/edit" class="btn btn-info btn-full-width">Edit this ticket</a>
                                 @unless($tt->complete)

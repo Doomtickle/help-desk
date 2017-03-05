@@ -50,6 +50,9 @@
             }else{
                 myDropzone.processQueue();
             }
+            myDropzone.on("successmultiple", function(files, response) {
+                window.location.replace("/home");
+            });
         });
     }
 }

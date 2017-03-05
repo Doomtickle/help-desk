@@ -15661,6 +15661,10 @@ li.list-group-item {
   background: inherit !important;
 }
 
+.no-border {
+  border: none;
+}
+
 /*# sourceMappingURL=app.css.map */
 
 /*
