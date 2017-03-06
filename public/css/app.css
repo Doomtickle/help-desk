@@ -15665,4 +15665,17 @@ li.list-group-item {
   border: none;
 }
 
+.modal-content {
+  background: #36596B;
+  color: #fff;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+}
+
+#inputBody, #inputTimeSpent {
+  font-size: 18px;
+  background: #e3e3e3;
+}
+
 /*# sourceMappingURL=app.css.map */

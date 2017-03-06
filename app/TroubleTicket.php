@@ -28,6 +28,11 @@ class TroubleTicket extends Model
        return $this->belongsTo(User::class);     
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     /**
      * @return @return \Illuminate\Database\Eloquent\Relations\HasMany
      */

@@ -96,6 +96,7 @@ class Company{
             "pwillys.com",
             "rfp.kerigan.com",
             "salelawfirm.com",
+            "serenitybeachrentals.com",
             "southernorthopedic.com",
             "spinecenterbr.com",
             "stage.gcreg.com",

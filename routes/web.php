@@ -14,6 +14,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/notifications/readall', 'NotificationsController@readAll');
     Route::post('/ticket', 'TroubleTicketController@store');
 
+    Route::post('/{ticket}/comment', 'CommentsController@store');
+
+
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
 });

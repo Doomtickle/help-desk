@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use App\SupportFile;
 use App\TroubleTicket;
 use App\Utilities\Company;
@@ -37,7 +38,7 @@ class TroubleTicketController extends Controller
      */
     public function index()
     {
-        $tickets = TroubleTicket::with('supportingFiles')->orderBy('created_at', 'desc')->get();
+        $tickets = TroubleTicket::with('supportingFiles', 'comments')->orderBy('created_at', 'desc')->get();
 
         return view('troubletickets.index', compact('tickets'));
     }
@@ -64,6 +65,7 @@ class TroubleTicketController extends Controller
         $troubleTicket          = TroubleTicket::create($request->all());
         $troubleTicket->user_id = \Auth::user()->id;
 
+        //Checks if a file was uploaded
         if($request->file('files')){
 
             $files = $request->file('files');
@@ -167,11 +169,13 @@ class TroubleTicketController extends Controller
         $this->sendUpdateNotifications($ticket, $changes);
         $ticket->save();
 
-        return back();
+        return response()->json([
+            'id' => $ticket->id
+        ]); 
     }
 
     /**
-     * Checks to see if a ticket has been updated and sends a notification 
+     * Sends a notification 
      * to the admins
      *
      * @param  App\TroubleTicket $ticket
