@@ -10,7 +10,8 @@ class Comment extends Model
 
 
     /** 
-     * A comment needs a commenter
+     * A comment belongs to a User
+     * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
