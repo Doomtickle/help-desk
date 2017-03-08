@@ -6,7 +6,7 @@ var statusButtonFilter;
 var priorityButtonFilter;
 
 // init Isotope
-var $grid = $('.grid').isotope({
+var grid = $('.grid').isotope({
     itemSelector: '.grid-item',
     layoutMode: 'fitRows',
     filter: function() {
@@ -17,23 +17,19 @@ var $grid = $('.grid').isotope({
         return searchResult && statusButtonResult && priorityButtonResult;
     }
 });
-
 $('#status-filters').on( 'click', 'button', function() {
     statusButtonFilter = $( this ).attr('data-filter');
-    $grid.isotope();
+    grid.isotope();
 });
 $('#priority-filters').on( 'click', 'button', function() {
     priorityButtonFilter = $( this ).attr('data-filter');
-    $grid.isotope();
+    grid.isotope();
 });
-
 // use value of search field to filter
 var $quicksearch = $('.quicksearch').keyup( debounce( function() {
     qsRegex = new RegExp( $quicksearch.val(), 'gi' );
-    $grid.isotope();
+    grid.isotope();
 }) );
-
-
 // change is-checked class on buttons
 $('.button-group').each( function( i, buttonGroup ) {
     var $buttonGroup = $( buttonGroup );
@@ -42,7 +38,12 @@ $('.button-group').each( function( i, buttonGroup ) {
         $( this ).addClass('is-checked');
     });
 });
-
+$("div").on("shown.bs.collapse", function(){
+    grid.isotope();
+});
+$("div").on("hidden.bs.collapse", function(){
+    grid.isotope();
+});
 
 // debounce so filtering doesn't happen every millisecond
 function debounce( fn, threshold ) {

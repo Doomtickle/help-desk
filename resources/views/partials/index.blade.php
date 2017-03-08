@@ -56,8 +56,8 @@
                                 </ul>
                                 <a href="/ticket/{{ $tt->id }}/edit" class="btn btn-info btn-full-width">Edit this ticket</a>
                                 @if($tt->comments->count())
-                                    <a class="btn btn-full-width btn-warning" role="button" data-toggle="collapse" href="#ticket-{{ $tt->id }}-comment" aria-expanded="false" aria-controls="ticket-{{ $tt->id }}-comment">View Comments</a>
-                                    <div class="collapse" id="ticket-{{ $tt->id }}-comment">
+                                    <a class="btn btn-full-width btn-warning" id="ticket-comment-{{$tt->id}}" role="button" data-toggle="collapse" href="#ticket-{{ $tt->id }}-comment" aria-expanded="false" aria-controls="ticket-{{ $tt->id }}-comment">View Comments</a>
+                                    <div class="collapse collaspe-target" id="ticket-{{ $tt->id }}-comment">
                                       <div class="well">
                                           <ul>
                                             @foreach( $tt->comments as $comment)
