@@ -17,6 +17,9 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->integer('trouble_ticket_id');
             $table->integer('user_id');
+            $table->integer('company_id');
+            $table->string('company');
+            $table->string('project');
             $table->float('time_spent');
             $table->text('body');
             $table->timestamps();

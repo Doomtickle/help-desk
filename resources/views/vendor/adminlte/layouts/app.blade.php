@@ -33,6 +33,7 @@
     @include('adminlte::layouts.partials.scripts')
 @show
 <script src="/js/libs.js"></script>
+
 @yield('scripts.footer')
 
 </body>

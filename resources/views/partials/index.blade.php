@@ -86,7 +86,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -97,6 +97,30 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
                     <input type="hidden" name="trouble_ticket_id" id="trouble_ticket_id">
+                      <div class="form-group">
+                          <label for="website">Website</label>
+                          <select name="website" class="form-control" id="website">
+                          @foreach(App\Company::all() as $company)
+                              <option value="{{ $company->id }}">{{ $company->name }}</option>
+                          @endforeach
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="Project">Project</label>
+                          <select name="project" class="form-control" id="project">
+                          @foreach(App\Project::all() as $project)
+                              <option value="{{ $project->id }}">{{ $project->name }}</option>
+                          @endforeach
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="task">Task</label>
+                          <select name="task" class="form-control" id="task">
+                          @foreach(App\Task::all() as $task)
+                              <option value="{{ $task->id }}">{{ $task->name }}</option>
+                          @endforeach
+                          </select>
+                      </div>
                         <div class="form-group">
                             <label for="body">Comment:</label>
                             <textarea name="body" id="inputBody" class="form-control" required="required">Resolved issue</textarea>

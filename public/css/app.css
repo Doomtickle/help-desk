@@ -15678,4 +15678,14 @@ li.list-group-item {
   background: #e3e3e3;
 }
 
+.select2-container {
+  display: block;
+  width: 100% !important;
+  background: #fff;
+}
+
+#select2-website-container {
+  color: #333;
+}
+
 /*# sourceMappingURL=app.css.map */
