@@ -41,12 +41,14 @@ class CommentsController extends Controller
     public function store(TroubleTicket $ticket, Request $request)
     {
         $this->validate($request, [
-            'body' => 'required',
-            'time_spent' => 'required',
-            'company' => 'required',
-            'project' => 'required',
-            'task' => 'required',
+            'body'           => 'required',
+            'task'           => 'required',
+            'company'        => 'required',
+            'project'        => 'required',
+            'time_spent'     => 'required',
+            'date_completed' => 'required'
         ]);
+
 
         $companyInfo = Company::where('id', $request->company)->first();
         $projectInfo = Project::where('id', $request->project)->first();
@@ -63,15 +65,29 @@ class CommentsController extends Controller
         $task_id = $taskInfo->id;
         $task_beebole_id = $taskInfo->beebole_id; 
         $time_spent = $request->time_spent; 
+        $date_completed = $request->date_completed;
         $body = $request->body;
 
-        $comment = Comment::create(compact('trouble_ticket_id', 'user_id', 'company_id', 'company', 'company_beebole_id', 'project', 'project_beebole_id', 'task', 'task_id', 'task_beebole_id', 'time_spent', 'body')); 
+        $comment = Comment::create(compact(
+            'trouble_ticket_id', 
+            'user_id', 
+            'company_id', 
+            'company', 
+            'company_beebole_id', 
+            'project', 
+            'project_beebole_id', 
+            'task', 
+            'task_id', 
+            'task_beebole_id', 
+            'time_spent', 
+            'date_completed',
+            'body'
+            )); 
 
 
-        Comment::sendToBeebole($comment);
+       Comment::sendToBeebole($comment);
         
-        return back();
-
+       return back();
     }
 
     /**

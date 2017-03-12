@@ -6,7 +6,11 @@
 
 
 @section('main-content')
-    @include('partials.index')
+    @if( ! \Auth::user()->beebole_key)
+        @include('partials.beebolekey')
+    @else
+        @include('partials.index')
+    @endif
 @stop
 
 @section('scripts.footer')

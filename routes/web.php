@@ -3,6 +3,8 @@
 
 Route::get('/', 'HomeController@index');
 
+Route::post('/beebole_key', 'HomeController@beeboleKey');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/tickets/all', 'TroubleTicketController@index');
     Route::get('/ticket/create', 'TroubleTicketController@create');

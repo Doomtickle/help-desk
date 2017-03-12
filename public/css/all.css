@@ -15437,7 +15437,7 @@ button.close {
 
 body {
   font-family: Heebo, sans-serif;
-  font-weight: 100;
+  font-weight: 400;
   font-size: 16px;
   color: #f5f5f5;
 }
@@ -15499,6 +15499,7 @@ strong {
   border-right: none;
   height: 70px;
   color: #FFF;
+  font-weight: 100;
   font-size: 38px;
   background: transparent;
   box-shadow: 0;
@@ -15524,21 +15525,21 @@ strong {
 
 .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
   height: 45px;
-  background: #29323c;
+  background: #29323c !important;
 }
 
 .select2-container--default .select2-search--dropdown .select2-search__field {
   border: 1px solid #aaa;
-  background: #29323c;
+  background: #29323c !important;
 }
 
 .select2-container--default .select2-results > .select2-results__options {
-  background: #29323c;
+  background: #29323c !important;
   font-weight: 400;
 }
 
 .select2-search--dropdown {
-  background: #29323c;
+  background: #29323c !important;
 }
 
 .form-control:focus {

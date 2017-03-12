@@ -1,4 +1,15 @@
     <div class="container">
+    @if(session('beebole_success'))
+        <div class="alert alert-success">
+            {{ session('beebole_success') }}
+        </div>
+    @endif
+    @if(session('beebole_error'))
+        <div class="alert alert-danger">
+            {{ session('beebole_error') }}
+        </div>
+    @endif
+
         <div class="row">
             <div class="form-group col-md-5 button-group">
                 <input type="text" name="quicksearch" class="quicksearch form-control" data-filter=".quicksearch" placeholder="Search" autofocus />
@@ -109,7 +120,7 @@
                       <div class="form-group">
                           <label for="Project">Project</label>
                           <select name="project" class="form-control" id="projects">
-                              {{-- JQuery here --}}
+                              {{-- JQuery will fill this out --}}
                           </select>
                       </div>
                       <div class="form-group">
@@ -123,6 +134,10 @@
                         <div class="form-group">
                             <label for="body">Comment:</label>
                             <textarea name="body" id="inputBody" class="form-control" required="required">Resolved issue</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_completed">Date Completed:</label>
+                            <input type="text" name="date_completed" id="date_completed" class="form-control" value="{{ \Carbon\Carbon::now()->toDateString() }}" required="required">
                         </div>
                         <div class="form-group">
                             <label for="time_spent">Time Spent</label>

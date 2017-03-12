@@ -26,6 +26,7 @@ class CreateCommentsTable extends Migration
             $table->string('task');
             $table->integer('task_beebole_id');
             $table->float('time_spent');
+            $table->date('date_completed');
             $table->text('body');
             $table->timestamps();
         });

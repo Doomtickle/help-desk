@@ -37,4 +37,22 @@ class HomeController extends Controller
         $tickets = TroubleTicket::orderBy('created_at', 'desc')->get();
         return view('adminlte::home', compact('tickets'));
     }
+
+    public function beeboleKey(Request $request)
+    {
+        $this->validate($request, [
+            'beebole_key' => 'required'
+        ]);
+
+        $user = \Auth::user();
+        $key = $request->beebole_key;
+
+        $user->beebole_key = $key;
+
+        $user->save();
+
+        return back();
+
+
+    }
 }

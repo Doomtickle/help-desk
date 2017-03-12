@@ -33,10 +33,11 @@ class Comment extends Model
 
     public static function sendToBeebole(Comment $comment)
     {
+       $beebole_key = \Auth::user()->beebole_key;
        $client = new Client();
        $response = $client->post('https://beebole-apps.com/api/v2', [
            'auth' => [
-               '35b8fe932e158eabc89d1e5f8c8e898b48393f90',
+               $beebole_key,
                'x',
                'Basic'
            ],
@@ -48,7 +49,8 @@ class Comment extends Model
                 'task'    => [
                    'id'   => $comment->task_beebole_id
                 ],
-                'date'    => '2017-03-13',
+                'date'    => $comment->date_completed,
+                //casting to a float because who the hell knows why it goes through as a string...
                 'hours'   => (float) $comment->time_spent,
                 'comment' => $comment->body
             ]
@@ -56,9 +58,11 @@ class Comment extends Model
 
        $response = \GuzzleHttp\json_decode($response->getBody(), true);
 
-       dd($response);
+       if($response['status'] == 'ok'){
+          return redirect('/home')->with('beebole_success', 'Successfully logged to Beebole!');
+       }
 
-
+       return redirect('/home')->with('beebole_error', 'There was a problem logging your time to Beebole. You\'ll have to log it manually');
 
  
     }

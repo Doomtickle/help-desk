@@ -122,3 +122,10 @@ function debounce( fn, threshold ) {
             })
         });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Zebra_datepicker/1.9.4/javascript/zebra_datepicker.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("input#date_completed").Zebra_DatePicker();
+    });
+    </script>
+
