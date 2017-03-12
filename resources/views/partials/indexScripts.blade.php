@@ -4,6 +4,7 @@
 var qsRegex;
 var statusButtonFilter;
 var priorityButtonFilter;
+var categoryButtonFilter;
 
 // init Isotope
 var grid = $('.grid').isotope({
@@ -14,7 +15,8 @@ var grid = $('.grid').isotope({
         var searchResult = qsRegex ? $this.text().match( qsRegex ) : true;
         var statusButtonResult = statusButtonFilter ? $this.is( statusButtonFilter ) : true;
         var priorityButtonResult = priorityButtonFilter ? $this.is( priorityButtonFilter ) : true;
-        return searchResult && statusButtonResult && priorityButtonResult;
+        var categoryButtonResult = categoryButtonFilter ? $this.is( categoryButtonFilter ) : true;
+        return searchResult && statusButtonResult && priorityButtonResult && categoryButtonResult;
     }
 });
 $('#status-filters').on( 'click', 'button', function() {
@@ -23,6 +25,10 @@ $('#status-filters').on( 'click', 'button', function() {
 });
 $('#priority-filters').on( 'click', 'button', function() {
     priorityButtonFilter = $( this ).attr('data-filter');
+    grid.isotope();
+});
+$('#category-filters').on( 'click', 'button', function() {
+    categoryButtonFilter = $( this ).attr('data-filter');
     grid.isotope();
 });
 // use value of search field to filter
@@ -92,8 +98,18 @@ function debounce( fn, threshold ) {
                 url: myurl,
                 data: $(this).serialize(),
                 success: function (data) {
+                    var i;
                     $("#comment-modal").attr("action", "/" + data.id + "/comment");
                     $("#trouble_ticket_id").val(data.id);
+                    $("#company_id").val(data.company_id);
+                    $("#company_name").html(data.company_name);
+                    for (i = 0; i < data.projects.length; i++){
+                        $("select#projects").append( $("<option>")
+                            .val(data.projects[i].id)
+                            .html(data.projects[i].name)
+                        );
+                    }
+
                     $('#myModal').modal("show");
 
                 },

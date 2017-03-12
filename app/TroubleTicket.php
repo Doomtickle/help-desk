@@ -19,7 +19,8 @@ class TroubleTicket extends Model
         'priority',
         'status',
         'complete',
-        'website',
+        'company',
+        'category',
     ];
     
     /**

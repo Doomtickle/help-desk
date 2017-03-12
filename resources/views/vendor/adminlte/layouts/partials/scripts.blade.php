@@ -15,7 +15,13 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script>
-    $('#website').select2();
+    $('#company').select2();
+</script>
+<script>
+    $('#projects').select2();
+</script>
+<script>
+    $('#tasks').select2();
 </script>
 
 

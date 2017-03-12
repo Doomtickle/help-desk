@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Task;
 use App\Company;
 use App\Project;
-use Carbon\Carbon;
-use GuzzleHttp\Client;
+use Carbon\Carbon; use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class BeeBoleController extends Controller
@@ -21,18 +20,6 @@ class BeeBoleController extends Controller
                'x',
                'Basic'
            ],
-//           'json' => [
-//               'service' => 'time_entry.create',
-//               'subproject' => [
-//                   'id' => 37
-//               ],
-//               'task' => [
-//                   'id' => 1
-//               ],
-//               'date' => '2017-01-20',
-//               'hours' => 8,
-//               'comment' => 'test comment'
-//           ]
             'json' => [
                 'service' => 'company.list',
             ]
@@ -44,17 +31,9 @@ class BeeBoleController extends Controller
        $companiesArray = [];
 
        foreach($companies as $company){
-           array_push($companiesArray, array('name' => $company['name'], 'beebole_id' => $company['id']));
+           Company::create([ 'name' => $company['name'], 'beebole_id' => $company['id'] ]);
        }
 
-       sort($companiesArray);
-
-       foreach($companiesArray as $company){
-            Company::create(['name' => $company['name'],
-                           'beebole_id' => $company['beebole_id'],
-             ]);
-
-       }
 
         return back();
     }
@@ -71,18 +50,6 @@ class BeeBoleController extends Controller
                    'x',
                    'Basic'
                ],
-    //           'json' => [
-    //               'service' => 'time_entry.create',
-    //               'subproject' => [
-    //                   'id' => 37
-    //               ],
-    //               'task' => [
-    //                   'id' => 1
-    //               ],
-    //               'date' => '2017-01-20',
-    //               'hours' => 8,
-    //               'comment' => 'test comment'
-    //           ]
                 'json' => [
                     'service' => 'project.list',
                     'company' => [
@@ -97,19 +64,9 @@ class BeeBoleController extends Controller
            $projectsArray = [];
 
            foreach($projects as $project){
-               array_push($projectsArray, array('name' => $project['name'], 'beebole_id' => $project['id']));
+               Project::create([ 'name' => $project['name'], 'beebole_id' => $project['id'], 'company_id' => $company->id ]);
            }
 
-           sort($projectsArray);
-
-           foreach($projectsArray as $project){
-                Project::create([
-
-                    'name' => $project['name'], 
-                    'beebole_id' => $project['beebole_id'], 
-                    'company_id' => $company->id ]);
-
-           }
        }
 
         return back();
@@ -126,18 +83,6 @@ class BeeBoleController extends Controller
                'x',
                'Basic'
            ],
-//           'json' => [
-//               'service' => 'time_entry.create',
-//               'subproject' => [
-//                   'id' => 37
-//               ],
-//               'task' => [
-//                   'id' => 1
-//               ],
-//               'date' => '2017-01-20',
-//               'hours' => 8,
-//               'comment' => 'test comment'
-//           ]
             'json' => [
                 'service' => 'task.list',
                 'company' =>[

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Company;
+use App\Project;
 use Carbon\Carbon;
 use App\SupportFile;
 use App\TroubleTicket;
-use App\Utilities\Company;
 use Illuminate\Http\Request;
 use App\Notifications\TicketCreated;
 use App\Notifications\TicketUpdated;
@@ -169,8 +170,18 @@ class TroubleTicketController extends Controller
         $this->sendUpdateNotifications($ticket, $changes);
         $ticket->save();
 
+
+
+        $company = Company::where('name', $ticket->company)->first();
+        $projects = Project::where('company_id', $company->id)->get();
+
+
+
         return response()->json([
-            'id' => $ticket->id
+            'id' => $ticket->id,
+            'company_name' => $company->name,
+            'company_id' => $company->id,
+            'projects' => $projects
         ]); 
     }
 

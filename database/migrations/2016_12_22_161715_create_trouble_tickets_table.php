@@ -18,7 +18,8 @@ class CreateTroubleTicketsTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->string('title');
             $table->text('description');
-            $table->string('website'); //uses Company.php
+            $table->string('company'); 
+            $table->string('category');
             $table->integer('priority');
             $table->string('status')->default('Pending');
             $table->boolean('complete')->default(false);

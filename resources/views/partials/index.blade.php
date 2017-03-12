@@ -19,6 +19,12 @@
                 <button class="button" data-filter=".priority-2">Priority 2</button>
                 <button class="button" data-filter=".priority-3">Priority 3</button>
             </div>
+            <div id="category-filters" class="button-group col-md-5">
+                <h3>Category</h3>
+                <button class="button is-checked" data-filter="*">Show All</button>
+                <button class="button" data-filter=".category-web">Web</button>
+                <button class="button" data-filter=".category-creative">Creative</button>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -26,7 +32,7 @@
             <div class="row">
                 <div class="grid-sizer"></div>
                 @foreach($tickets as $tt)
-                    <div id="box{{ $tt->id }}" class="grid-item{{ $tt->complete ? ' complete' : ' incomplete' }} priority-{{ $tt->priority }} {{$tt->status == 'On Hold' ? 'on-hold': ''}} {{ str_replace('.', '-', $tt->website) }}" data-category="{{ str_replace('.', '-', $tt->website) }}">
+                    <div id="box{{ $tt->id }}" class="grid-item{{ $tt->complete ? ' complete' : ' incomplete' }} priority-{{ $tt->priority }} {{$tt->status == 'On Hold' ? 'on-hold': ''}} category-{{ strtolower($tt->category) }}" data-category="{{ $tt->company }}">
                         <div id="ticket{{ $tt->id }}" class="box box-{{$tt->complete ? 'success' : 'danger'}}">
                             <div class="box-header with-border">
                                 <div class="box-title">
@@ -37,10 +43,11 @@
                             </div>
                             <div class="box-body">
                                 <ul class="list-group">
-                                    <li class="list-group-item"><strong>Website:</strong> <a href="http://{{ $tt->website }}" target="_blank">{{ $tt->website }}</a></li>
+                                    <li class="list-group-item"><strong>Company:</strong> {{ $tt->company }}</a></li>
                                     <li class="list-group-item"><strong>Title: </strong> {{ $tt->title }}</li>
                                     <li class="list-group-item"><strong>Description:</strong> {{ $tt->description }}</li>
                                     <li id="status{{$tt->id}}" class="list-group-item"><strong>Status:</strong> {{ $tt->status }} </li>
+                                    <li id="category{{$tt->id}}" class="list-group-item"><strong>Category:</strong> {{ $tt->category }} </li>
                                     <li class="list-group-item"><strong>Priority:</strong> {{ $tt->priority }}</li>
                                     <li class="list-group-item"><strong>Created:</strong> {{ $tt->created_at->diffForHumans() }}</li>
                                     @if($tt->supportingFiles->count())
@@ -97,25 +104,17 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
                     <input type="hidden" name="trouble_ticket_id" id="trouble_ticket_id">
-                      <div class="form-group">
-                          <label for="website">Website</label>
-                          <select name="website" class="form-control" id="website">
-                          @foreach(App\Company::all() as $company)
-                              <option value="{{ $company->id }}">{{ $company->name }}</option>
-                          @endforeach
-                          </select>
-                      </div>
+                    <input type="hidden" name="company" id="company_id">
+                    <h3 id="company_name"></h3>
                       <div class="form-group">
                           <label for="Project">Project</label>
-                          <select name="project" class="form-control" id="project">
-                          @foreach(App\Project::all() as $project)
-                              <option value="{{ $project->id }}">{{ $project->name }}</option>
-                          @endforeach
+                          <select name="project" class="form-control" id="projects">
+                              {{-- JQuery here --}}
                           </select>
                       </div>
                       <div class="form-group">
                           <label for="task">Task</label>
-                          <select name="task" class="form-control" id="task">
+                          <select name="task" class="form-control" id="tasks">
                           @foreach(App\Task::all() as $task)
                               <option value="{{ $task->id }}">{{ $task->name }}</option>
                           @endforeach

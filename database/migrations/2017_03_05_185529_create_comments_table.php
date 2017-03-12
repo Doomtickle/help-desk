@@ -19,7 +19,12 @@ class CreateCommentsTable extends Migration
             $table->integer('user_id');
             $table->integer('company_id');
             $table->string('company');
+            $table->integer('company_beebole_id');
             $table->string('project');
+            $table->integer('project_beebole_id');
+            $table->integer('task_id');
+            $table->string('task');
+            $table->integer('task_beebole_id');
             $table->float('time_spent');
             $table->text('body');
             $table->timestamps();

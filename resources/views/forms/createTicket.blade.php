@@ -18,12 +18,17 @@
       <textarea name="description" class="form-control" id="description" placeholder="Description"></textarea>
   </div>
   <div class="form-group">
-      <label for="website">Website</label>
-      <select name="website" class="form-control" id="website">
-          @foreach(App\Utilities\Company::all() as $company)
-              <option value="{{ $company }}">{{ $company }}</option>
+      <label for="company">Company</label>
+      <select name="company" class="form-control" id="company">
+          @foreach(App\Company::all() as $company)
+              <option value="{{ $company->name }}">{{ $company->name }}</option>
           @endforeach
       </select>
+  </div>
+  <div class="form-group">
+      <label for="category">Category</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="category" value="Web"> Web</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="category" value="Creative"> Creative</label>
   </div>
   <div class="form-group">
       <label for="priority">Priority</label>
