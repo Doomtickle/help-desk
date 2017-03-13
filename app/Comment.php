@@ -42,17 +42,20 @@ class Comment extends Model
                'Basic'
            ],
             'json' => [
-                'service' => 'time_entry.create',
-                'project' => [
-                   'id'   => $comment->project_beebole_id
+                'service'    => 'time_entry.create',
+                'project'    => [
+                    'id'     => $comment->project_beebole_id
                 ],
-                'task'    => [
-                   'id'   => $comment->task_beebole_id
+                'subproject' => [
+                    'id'     => $comment->subproject_beebole_id
                 ],
-                'date'    => $comment->date_completed,
+                'task'       => [
+                    'id'     => $comment->task_beebole_id
+                ],
+                'date'       => $comment->date_completed,
                 //casting to a float because who the hell knows why it goes through as a string...
-                'hours'   => (float) $comment->time_spent,
-                'comment' => $comment->body
+                'hours'      => (float) $comment->time_spent,
+                'comment'    => $comment->body
             ]
        ]);
 
@@ -62,7 +65,7 @@ class Comment extends Model
           return redirect('/home')->with('beebole_success', 'Successfully logged to Beebole!');
        }
 
-       return redirect('/home')->with('beebole_error', 'There was a problem logging your time to Beebole. You\'ll have to log it manually');
+       return redirect('/home')->with('beebole_error', 'There was a problem logging your time to Beebole. You\'ll have to log it manually.');
 
  
     }

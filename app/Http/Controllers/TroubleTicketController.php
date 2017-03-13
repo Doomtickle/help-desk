@@ -178,10 +178,10 @@ class TroubleTicketController extends Controller
 
 
         return response()->json([
-            'id' => $ticket->id,
+            'id'           => $ticket->id,
             'company_name' => $company->name,
-            'company_id' => $company->id,
-            'projects' => $projects
+            'company_id'   => $company->id,
+            'projects'     => $projects
         ]); 
     }
 
