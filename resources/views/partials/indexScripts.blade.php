@@ -128,4 +128,10 @@ function debounce( fn, threshold ) {
         $("input#date_completed").Zebra_DatePicker();
     });
     </script>
+    <script>
+    $(document).ready(function(){
+        $("input#start_date").Zebra_DatePicker();
+        $("input#end_date").Zebra_DatePicker();
+    });
+    </script>
 

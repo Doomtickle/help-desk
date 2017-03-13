@@ -22,6 +22,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/beebole/projects/seed', 'BeeBoleController@updateProjects');
     Route::get('/beebole/tasks/seed', 'BeeBoleController@updateTasks');
 
+    Route::get('/agendas/create', 'AgendasController@create');
+    Route::post('/agendas', 'AgendasController@store');
+
 
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
