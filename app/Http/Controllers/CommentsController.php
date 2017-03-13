@@ -85,7 +85,7 @@ class CommentsController extends Controller
             )); 
 
 
-       Comment::sendToBeebole($comment);
+      // Comment::sendToBeebole($comment);
         
        return back();
     }

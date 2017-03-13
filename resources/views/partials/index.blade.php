@@ -118,8 +118,14 @@
                     <input type="hidden" name="company" id="company_id">
                     <h3 id="company_name"></h3>
                       <div class="form-group">
-                          <label for="Project">Project</label>
+                          <label for="project">Project</label>
                           <select name="project" class="form-control" id="projects">
+                              {{-- JQuery will fill this out --}}
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <label for="subproject">Project</label>
+                          <select name="subproject" class="form-control" id="subprojects">
                               {{-- JQuery will fill this out --}}
                           </select>
                       </div>

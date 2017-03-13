@@ -122,6 +122,54 @@ function debounce( fn, threshold ) {
             })
         });
     </script>
+    <script>
+        $('select#projects').on('change', function () {
+
+            //TODO: find out why I have to do this
+            //this is a workaround for ajax requests sometimes throwing a 500 Internal Server
+            //error.  This will prefilter before each request.
+            // $.ajaxPrefilter(function (options, originalOptions, xhr) { // this will run before each request
+            //     var token = $('meta[name="csrf-token"]').attr('content'); // or _token, whichever you are using
+
+            //     if (token) {
+            //         return xhr.setRequestHeader('X-CSRF-TOKEN', token); // adds directly to the XmlHttpRequest Object
+            //     }
+            // });
+
+            // e.preventDefault();
+
+            // var el = $(this);
+
+            // //TODO:
+            // //make this not suck so hard 
+            // //
+            // var id = el[0].children[2].value;
+            // //this is the easiest way I can think of to get the trouble ticket id. 
+            // //it's just a hidden form element at position el[0].children[2]
+
+            var data = $("select#projects").val();
+            var myurl = "/subprojects/" + data;
+            console.log(data);
+            $.ajax({
+                type: "GET",
+                url: myurl,
+                data: data,
+                success: function (data) {
+
+                    console.log(data);
+
+                    $('#myModal').modal("show");
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('There was an error processing your request. Please notify an administrator \n Error: ' + thrownError);
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                    console.log(thrownError);
+                }
+            })
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Zebra_datepicker/1.9.4/javascript/zebra_datepicker.js"></script>
     <script>
     $(document).ready(function(){

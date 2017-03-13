@@ -12,4 +12,10 @@ class Company extends Model
     {
         return $this->hasMany(Project::class);
     }
+
+    public function subprojects()
+    {
+        return $this->hasMany(Subproject::class);
+    }
+
 }

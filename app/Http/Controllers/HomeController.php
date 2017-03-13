@@ -7,9 +7,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Http\Requests;
-use Illuminate\Http\Request;
 use App\TroubleTicket;
+use Illuminate\Http\Request;
 
 /**
  * Class HomeController

@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/beebole/companies/seed', 'BeeBoleController@listCompanies');
     Route::get('/beebole/projects/seed', 'BeeBoleController@updateProjects');
     Route::get('/beebole/tasks/seed', 'BeeBoleController@updateTasks');
+    Route::get('/beebole/subprojects/seed', 'BeeboleController@seedSubprojects');
+    Route::get('/subprojects/{id}', 'BeeboleController@getSubprojects');
 
     Route::get('/agendas/create', 'AgendasController@create');
     Route::post('/agendas', 'AgendasController@store');
