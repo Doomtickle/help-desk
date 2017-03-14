@@ -35,26 +35,50 @@ class Comment extends Model
     {
        $beebole_key = \Auth::user()->beebole_key;
        $client = new Client();
-       $response = $client->post('https://beebole-apps.com/api/v2', [
-           'auth' => [
-               $beebole_key,
-               'x',
-               'Basic'
-           ],
-            'json' => [
-                'service' => 'time_entry.create',
-                'project' => [
-                   'id'   => $comment->project_beebole_id
-                ],
-                'task'    => [
-                   'id'   => $comment->task_beebole_id
-                ],
-                'date'    => $comment->date_completed,
-                //casting to a float because who the hell knows why it goes through as a string...
-                'hours'   => (float) $comment->time_spent,
-                'comment' => $comment->body
-            ]
-       ]);
+       //since the API is wonky, we'll have to do a different call depending on whether or not the project has a subproject
+       if($comment->subproject){
+         $response = $client->post('https://beebole-apps.com/api/v2', [
+             'auth' => [
+                 $beebole_key,
+                 'x',
+                 'Basic'
+             ],
+              'json' => [
+                  'service' => 'time_entry.create',
+                  'subproject' => [
+                     'id'   => $comment->subproject_beebole_id
+                  ],
+                  'task'    => [
+                     'id'   => $comment->task_beebole_id
+                  ],
+                  'date'    => $comment->date_completed,
+                  //casting to a float because who the hell knows why it goes through as a string...
+                  'hours'   => (float) $comment->time_spent,
+                  'comment' => $comment->body
+              ]
+         ]);
+       }else{
+         $response = $client->post('https://beebole-apps.com/api/v2', [
+             'auth' => [
+                 $beebole_key,
+                 'x',
+                 'Basic'
+             ],
+              'json' => [
+                  'service' => 'time_entry.create',
+                  'project' => [
+                     'id'   => $comment->project_beebole_id
+                  ],
+                  'task'    => [
+                     'id'   => $comment->task_beebole_id
+                  ],
+                  'date'    => $comment->date_completed,
+                  //casting to a float because who the hell knows why it goes through as a string...
+                  'hours'   => (float) $comment->time_spent,
+                  'comment' => $comment->body
+              ]
+         ]);
+     }
 
        $response = \GuzzleHttp\json_decode($response->getBody(), true);
 

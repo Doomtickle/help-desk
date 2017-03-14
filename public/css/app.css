@@ -15558,8 +15558,40 @@ strong {
   width: 100% !important;
 }
 
+.status-buttons {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+.well {
+  color: #333;
+}
+
+.searchbar {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.status-buttons:first-child {
+  margin-right: 20px;
+  text-align: center;
+}
+
 .button {
   display: inline-block;
+  width: 100%;
   padding: 0.5em 1.0em;
   background: transparent;
   border: none;
@@ -15569,7 +15601,6 @@ strong {
   color: #fff;
   text-shadow: 0 1px white;
   cursor: pointer;
-  margin-bottom: 30px;
 }
 
 .button:hover {

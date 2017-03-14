@@ -21,6 +21,9 @@
     $('#projects').select2();
 </script>
 <script>
+    $('#subprojects').select2();
+</script>
+<script>
     $('#tasks').select2();
 </script>
 

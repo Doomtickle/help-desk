@@ -106,9 +106,7 @@ class TroubleTicketController extends Controller
     public function show($id)
     {
         $tt        = TroubleTicket::ticketInfo($id);
-        $companies = Company::all();
-
-        return view('troubletickets.show', compact('tt', 'companies'));
+        return view('troubletickets.show', compact('tt'));
     }
 
     /**
