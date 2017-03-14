@@ -7,6 +7,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Http\Requests;
 use App\TroubleTicket;
 use Illuminate\Http\Request;

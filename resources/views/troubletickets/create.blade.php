@@ -3,7 +3,7 @@
 @section('main-content')
     <div class="container">
         <div class="col-md-6">
-            <h1>New Ticket</h1>
+            <h1>New Task</h1>
             @include('forms.createTicket')
         </div>
     </div>

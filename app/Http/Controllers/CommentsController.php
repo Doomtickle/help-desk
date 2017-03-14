@@ -49,9 +49,14 @@ class CommentsController extends Controller
             'date_completed' => 'required'
         ]);
 
+        $companyInfo = Company::with('projects', 'subprojects')->where('id', $request->company)->first();
+        $projectInfo = $companyInfo->projects->find($request->project);
 
-        $companyInfo = Company::where('id', $request->company)->first();
-        $projectInfo = Project::where('id', $request->project)->first();
+        if($request->subproject){
+            $subprojectInfo = $companyInfo->subprojects->where('beebole_id', $request->subproject)->first();
+            $subproject = $subprojectInfo->name;
+            $subproject_beebole_id = $subprojectInfo->beebole_id;
+        }
         $taskInfo = Task::where('id', $request->task)->first();
 
         $trouble_ticket_id = $ticket->id;
@@ -76,6 +81,8 @@ class CommentsController extends Controller
             'company_beebole_id', 
             'project', 
             'project_beebole_id', 
+            'subproject',
+            'subproject_beebole_id',
             'task', 
             'task_id', 
             'task_beebole_id', 
@@ -84,8 +91,7 @@ class CommentsController extends Controller
             'body'
             )); 
 
-
-       Comment::sendToBeebole($comment);
+      Comment::sendToBeebole($comment);
         
        return back();
     }

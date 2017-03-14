@@ -47,7 +47,7 @@ class TroubleTicket extends Model
 
     public static function ticketInfo($id)
     {
-        return static::where(compact('id'))->with('user')->first();
+        return static::where(compact('id'))->with('user', 'supportingFiles', 'comments')->first();
 
     }
     /**

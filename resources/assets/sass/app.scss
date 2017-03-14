@@ -113,8 +113,29 @@ strong{
     margin-bottom:10px;
     width:100% !important;
 }
+.status-buttons{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    margin-bottom:2em;
+
+}
+.well{
+    color:#333;
+}
+.searchbar{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+.status-buttons:first-child{
+    margin-right:20px;
+    text-align:center;
+}
 .button {
     display: inline-block;
+    width:100%;
     padding: 0.5em 1.0em;
     background: transparent;
     border: none;
@@ -123,7 +144,6 @@ strong{
     color: #fff;
     text-shadow: 0 1px white;
     cursor: pointer;
-    margin-bottom:30px;
 }
 .button:hover {
     background-color: #FFF;

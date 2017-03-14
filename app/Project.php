@@ -12,4 +12,9 @@ class Project extends Model
     {
         return $this->belongsTo(Company::class);
     }
+
+    public function subprojects()
+    {
+        return $this->hasMany(Subproject::class);
+    }
 }

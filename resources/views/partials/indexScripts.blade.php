@@ -122,6 +122,38 @@ function debounce( fn, threshold ) {
             })
         });
     </script>
+    <script>
+        $('select#projects').on('change', function () {
+
+            var i;
+            var data = $("select#projects").val();
+            var myurl = "/subprojects/" + data;
+            console.log(data);
+            $.ajax({
+                type: "GET",
+                url: myurl,
+                data: data,
+                success: function (data) {
+                    if(data.subprojects.length > 0){
+                        for (i = 0; i < data.subprojects.length; i++){
+                            $("select#subprojects").append( $("<option>")
+                                .val(data.subprojects[i].beebole_id)
+                                .html(data.subprojects[i].name)
+                            );
+                        }
+                        $("#subproject-field").css("display", "block");
+                    }
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('There was an error processing your request. Please notify an administrator \n Error: ' + thrownError);
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                    console.log(thrownError);
+                }
+            })
+        });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Zebra_datepicker/1.9.4/javascript/zebra_datepicker.js"></script>
     <script>
     $(document).ready(function(){

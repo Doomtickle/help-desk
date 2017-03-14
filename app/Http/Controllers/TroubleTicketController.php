@@ -106,9 +106,7 @@ class TroubleTicketController extends Controller
     public function show($id)
     {
         $tt        = TroubleTicket::ticketInfo($id);
-        $companies = Company::all();
-
-        return view('troubletickets.show', compact('tt', 'companies'));
+        return view('troubletickets.show', compact('tt'));
     }
 
     /**
@@ -172,16 +170,15 @@ class TroubleTicketController extends Controller
 
 
 
-        $company = Company::where('name', $ticket->company)->first();
-        $projects = Project::where('company_id', $company->id)->get();
-
+        $company     = Company::with('projects')->where('name', $ticket->company)->first();
+        $projects    = $company->projects;
 
 
         return response()->json([
             'id'           => $ticket->id,
             'company_name' => $company->name,
             'company_id'   => $company->id,
-            'projects'     => $projects
+            'projects'     => $projects,
         ]); 
     }
 
