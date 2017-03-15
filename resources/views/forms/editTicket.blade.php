@@ -19,12 +19,12 @@
       <textarea name="description" class="form-control" id="description" placeholder="Description">{{ $ticket->description }}</textarea>
   </div>
   <div class="form-group">
-      <label for="website">Website</label>
-      <select name="website" class="form-control" id="website">
-          <option value="{{ $ticket->website }}">{{ $ticket->website }}</option>
-          @foreach(App\Utilities\Company::all() as $company)
-              @if ($company != $ticket->website)
-                  <option value="{{ $company }}">{{ $company }}</option>
+      <label for="company">Company</label>
+      <select name="company" class="form-control" id="company">
+          <option value="{{ $ticket->company }}">{{ $ticket->company }}</option>
+          @foreach(App\Company::all() as $company)
+              @if ($company != $ticket->company)
+                  <option value="{{ $company->name }}">{{ $company->name }}</option>
               @endif
           @endforeach
       </select>
@@ -33,7 +33,11 @@
       <label for="status">Status:</label>
       <label class="radio-inline"><input type="radio" class="form-control" name="status" id="pending" value="Pending" > Pending</label>
       <label class="radio-inline"><input type="radio" class="form-control" name="status" id="on-hold" value="On Hold"> On Hold</label>
-      <label class="radio-inline"><input type="radio" class="form-control" name="status" id="complete" value="Complete"> Complete</label>
+  </div>
+  <div class="form-group">
+      <label for="category">Category</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="category" value="Web" id="web"> Web</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="category" value="Creative" id="creative"> Creative</label>
   </div>
   <div class="form-group">
       <label for="priority">Priority:</label>

@@ -141,7 +141,7 @@ class TroubleTicketController extends Controller
         }
         $ticket->updateStatus();
         $ticket->save();
-        return back();
+        return redirect('/home');
     }
 
     /**

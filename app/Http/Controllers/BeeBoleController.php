@@ -12,13 +12,15 @@ use Illuminate\Http\Request;
 
 class BeeBoleController extends Controller
 {
+
     public function seedCompanies()
     {
        $client = new Client();
+       $beebole_key = \Auth::user()->beebole_key;
 
        $response = $client->post('https://beebole-apps.com/api/v2', [
            'auth' => [
-               '35b8fe932e158eabc89d1e5f8c8e898b48393f90',
+               $beebole_key,
                'x',
                'Basic'
            ],
@@ -30,10 +32,11 @@ class BeeBoleController extends Controller
        $response = \GuzzleHttp\json_decode($response->getBody(), true);
        $companies = $response['companies'];
 
-       $companiesArray = [];
 
        foreach($companies as $company){
-           Company::create([ 'name' => $company['name'], 'beebole_id' => $company['id'] ]);
+	       	if($company['active']){
+	           Company::updateOrCreate([ 'name' => $company['name'], 'beebole_id' => $company['id'], 'status' => 'active' ]);
+	       	}
        }
 
 
@@ -43,12 +46,13 @@ class BeeBoleController extends Controller
     public function seedProjects()
     {
        $client = new Client();
+       $beebole_key = \Auth::user()->beebole_key;
 
        $companies = Company::all();
        foreach($companies as $company){
            $response = $client->post('https://beebole-apps.com/api/v2', [
                'auth' => [
-                   '35b8fe932e158eabc89d1e5f8c8e898b48393f90',
+                   $beebole_key,
                    'x',
                    'Basic'
                ],
@@ -66,14 +70,16 @@ class BeeBoleController extends Controller
            $projectsArray = [];
 
            foreach($projects as $project){
-               Project::create([ 'name' => $project['name'], 
+           	if($project['active']){
+               Project::updateOrCreate([ 'name' => $project['name'], 
                 'beebole_id' => $project['id'], 
                 'company_id' => $company->id, 
                 'subprojects' => $project['subprojects']['count'] 
                 ]);
            }
-
        }
+
+    }
 
         return back();
 
@@ -81,11 +87,12 @@ class BeeBoleController extends Controller
     public function seedTasks()
     {
        $client = new Client();
+       $beebole_key = \Auth::user()->beebole_key;
 
        $company = Company::find(105);
        $response = $client->post('https://beebole-apps.com/api/v2', [
            'auth' => [
-               '35b8fe932e158eabc89d1e5f8c8e898b48393f90',
+               $beebole_key,
                'x',
                'Basic'
            ],
@@ -100,17 +107,9 @@ class BeeBoleController extends Controller
        $response = \GuzzleHttp\json_decode($response->getBody(), true);
        $tasks = $response['tasks'];
 
-       $tasksArray = [];
-
        foreach($tasks as $task){
-           array_push($tasksArray, array('name' => $task['name'], 'beebole_id' => $task['id']));
-       }
 
-       sort($tasksArray);
-
-       foreach($tasksArray as $task){
-
-            Task::create([
+            Task::updateOrCreate([
 
                 'name' => $task['name'], 
                 'beebole_id' => $task['beebole_id'], 
@@ -128,13 +127,14 @@ class BeeBoleController extends Controller
     {
 
        $client = new Client();
+       $beebole_key = \Auth::user()->beebole_key;
 
        $projects = Project::with('company')->where('subprojects', '>', '0')->get();
 
        foreach($projects as $project){
        $response = $client->post('https://beebole-apps.com/api/v2', [
            'auth' => [
-               '35b8fe932e158eabc89d1e5f8c8e898b48393f90',
+               $beebole_key,
                'x',
                'Basic'
            ],
@@ -151,12 +151,15 @@ class BeeBoleController extends Controller
        $subprojects = $response['subprojects'];
 
       foreach($subprojects as $subproject){
-        Subproject::create([ 
-          'name'       => $subproject['name'], 
-          'beebole_id' => $subproject['id'], 
-          'project_id' => $project->id, 
-          'company_id' => $project->company->id 
-        ]);
+
+        if($subproject['active']){
+          Subproject::updateOrCreate([ 
+            'name'       => $subproject['name'], 
+            'beebole_id' => $subproject['id'], 
+            'project_id' => $project->id, 
+            'company_id' => $project->company->id 
+          ]);
+          }
        }
 
     }
@@ -173,41 +176,6 @@ class BeeBoleController extends Controller
           'subprojects' => $subprojects
       ]); 
 
-    }
-
-    public function updateCompanies()
-    {
-       $client = new Client();
-       $beebole_key = \Auth::user()->pluck('beebole_id');
-
-       $response = $client->post('https://beebole-apps.com/api/v2', [
-           'auth' => [
-               $beebole_key,
-               'x',
-               'Basic'
-           ],
-            'json' => [
-                'service' => 'company.list',
-            ]
-       ]);
-
-       $response = \GuzzleHttp\json_decode($response->getBody(), true);
-       $companies = $response['companies'];
-
-       foreach($companies as $company){
-           Company::update([ 'name' => $company['name'], 'beebole_id' => $company['id'] ]);
-       }
-
-    }
-
-    public function updateProjects()
-    {
-                   
-    }
-
-    public function updateBeebole()
-    {
-      //
     }
 
 }

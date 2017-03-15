@@ -73,7 +73,9 @@
                             </li>
                             @endif
                         </ul>
-                        {{-- <a href="/ticket/{{ $tt->id }}/edit" class="btn btn-info btn-full-width">Edit this ticket</a> --}}
+                        @unless($tt->complete)
+                            <a href="/ticket/{{ $tt->id }}/edit" class="btn btn-info btn-full-width">Edit this ticket</a>
+                        @endunless
                         @if($tt->comments->count())
                         <a class="btn btn-full-width btn-warning" id="ticket-comment-{{$tt->id}}" role="button" data-toggle="collapse" href="#ticket-{{ $tt->id }}-comment" aria-expanded="false" aria-controls="ticket-{{ $tt->id }}-comment">View Comments</a>
                         <div class="collapse collaspe-target" id="ticket-{{ $tt->id }}-comment">

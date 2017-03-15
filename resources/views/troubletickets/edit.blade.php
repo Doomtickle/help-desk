@@ -4,18 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h1>Edit Ticket #{{ $ticket->id }}</h1>
-            </div>
-            <div class="col-md-6">
-                @unless($ticket->complete)
-                    <form action="/complete/{{ $ticket->id }}" method="post">
-                        {{ method_field('PATCH') }}
-                        {{ csrf_field() }}
-                           <div class="form-group">
-                               <button type="submit" class="btn btn-danger pull-right">Mark Complete</button>
-                           </div> 
-                    </form>
-               @endunless
+                <h1>Edit Task #{{ $ticket->id }}</h1>
             </div>
         </div>
           @include('forms.editTicket')
@@ -24,7 +13,7 @@
 @section('scripts.footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
     <script>
-        $('#website').select2();
+        $('#company').select2();
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
     <script>
@@ -61,6 +50,18 @@
               break;
            case 'Complete':
               echo '$("#complete").iCheck("check");'; 
+              break;
+          }
+    @endphp
+    </script>
+    <script>
+    @php
+        switch($ticket->category){
+           case 'Web':
+              echo '$("#web").iCheck("check");'; 
+              break;
+           case 'Creative':
+              echo '$("#creative").iCheck("check");'; 
               break;
           }
     @endphp

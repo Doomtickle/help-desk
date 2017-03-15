@@ -10,14 +10,15 @@
     @endif
   {{ csrf_field() }}
   <div class="form-group">
-      <input type="text" name="title" class="form-control" id="title" placeholder="Subject">
+      <input type="text" name="title" class="form-control" id="title" placeholder="Subject" value="{{ old('title') }}">
   </div>
   <div class="form-group">
-      <textarea name="description" class="form-control" id="description" placeholder="Description"></textarea>
+      <textarea name="description" class="form-control" id="description" placeholder="Description">{{ old('description')}}</textarea>
   </div>
   <div class="form-group">
       <label for="company">Company</label>
       <select name="company" class="form-control" id="company">
+          <option value="">Select a Company</option>
           @foreach(App\Company::all() as $company)
               <option value="{{ $company->name }}">{{ $company->name }}</option>
           @endforeach

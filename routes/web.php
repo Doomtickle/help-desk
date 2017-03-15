@@ -18,11 +18,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/{ticket}/comment', 'CommentsController@store');
 
-    Route::get('/beebole/companies/seed', 'BeeBoleController@listCompanies');
-    Route::get('/beebole/projects/seed', 'BeeBoleController@updateProjects');
-    Route::get('/beebole/tasks/seed', 'BeeBoleController@updateTasks');
+    Route::get('/beebole/companies/seed', 'BeeBoleController@seedCompanies');
+    Route::get('/beebole/projects/seed', 'BeeBoleController@seedProjects');
     Route::get('/beebole/subprojects/seed', 'BeeBoleController@seedSubprojects');
+    Route::get('/beebole/tasks/seed', 'BeeBoleController@seedTasks');
     Route::get('/subprojects/{id}', 'BeeBoleController@getSubprojects');
+    Route::get('/beebole/update', 'BeeBoleController@updateBeebole');
 
     Route::get('/agendas/create', 'AgendasController@create');
     Route::post('/agendas', 'AgendasController@store');
