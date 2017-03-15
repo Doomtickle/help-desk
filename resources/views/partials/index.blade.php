@@ -47,7 +47,7 @@
         <div class="row">
             <div class="grid-sizer"></div>
             @foreach($tickets as $tt)
-            <div id="box{{ $tt->id }}" class="grid-item{{ $tt->complete ? ' complete' : ' incomplete' }} priority-{{ $tt->priority }} {{$tt->status == 'On Hold' ? 'on-hold': ''}} category-{{ strtolower($tt->category) }}" data-category="{{ $tt->company }}">
+            <div id="box{{ $tt->id }}" class="grid-item{{ $tt->complete ? ' complete' : ' incomplete' }} priority-{{ $tt->priority }} {{$tt->status == 'On Hold' ? 'on-hold': ''}} category-{{ strtolower($tt->category) }}" data-category="{{ $tt->company }}" style="word-wrap: break-word;">
                 <div id="ticket{{ $tt->id }}" class="box box-{{$tt->complete ? 'success' : 'danger'}}">
                     <div class="box-header with-border">
                         <div class="box-title">
