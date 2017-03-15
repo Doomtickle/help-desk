@@ -57,7 +57,6 @@
                     <div class="box-body">
                         <ul class="list-group">
                             <li class="list-group-item"><strong>Company:</strong> {{ $tt->company }}</a></li>
-                            <li class="list-group-item"><strong>Title: </strong> {{ $tt->title }}</li>
                             <li class="list-group-item"><strong>Description:</strong> {{ $tt->description }}</li>
                             <li id="status{{$tt->id}}" class="list-group-item"><strong>Status:</strong> {{ $tt->status }} </li>
                             <li id="category{{$tt->id}}" class="list-group-item"><strong>Category:</strong> {{ $tt->category }} </li>
