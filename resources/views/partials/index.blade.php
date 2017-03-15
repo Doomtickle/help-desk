@@ -51,7 +51,7 @@
                 <div id="ticket{{ $tt->id }}" class="box box-{{$tt->complete ? 'success' : 'danger'}}">
                     <div class="box-header with-border">
                         <div class="box-title">
-                            <h3>Task #{{ $tt->id }}</h3>
+                            <h3>{{  $tt->title }}</h3>
                         </div>
                     </div>
                     <div class="box-body">
