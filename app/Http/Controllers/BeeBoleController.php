@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class BeeBoleController extends Controller
 {
-    public function listCompanies()
+    public function seedCompanies()
     {
        $client = new Client();
 
@@ -40,7 +40,7 @@ class BeeBoleController extends Controller
         return back();
     }
 
-    public function updateProjects()
+    public function seedProjects()
     {
        $client = new Client();
 
@@ -78,7 +78,7 @@ class BeeBoleController extends Controller
         return back();
 
     }
-    public function updateTasks()
+    public function seedTasks()
     {
        $client = new Client();
 
@@ -173,6 +173,41 @@ class BeeBoleController extends Controller
           'subprojects' => $subprojects
       ]); 
 
+    }
+
+    public function updateCompanies()
+    {
+       $client = new Client();
+       $beebole_key = \Auth::user()->pluck('beebole_id');
+
+       $response = $client->post('https://beebole-apps.com/api/v2', [
+           'auth' => [
+               $beebole_key,
+               'x',
+               'Basic'
+           ],
+            'json' => [
+                'service' => 'company.list',
+            ]
+       ]);
+
+       $response = \GuzzleHttp\json_decode($response->getBody(), true);
+       $companies = $response['companies'];
+
+       foreach($companies as $company){
+           Company::update([ 'name' => $company['name'], 'beebole_id' => $company['id'] ]);
+       }
+
+    }
+
+    public function updateProjects()
+    {
+                   
+    }
+
+    public function updateBeebole()
+    {
+      //
     }
 
 }
