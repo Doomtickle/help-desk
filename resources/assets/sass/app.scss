@@ -13,6 +13,10 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+.login-page{
+    background: url(/img/mountain.jpg);
+    background-size:cover;
+}
 body{
     font-family:Heebo, sans-serif;
     font-weight:400;
