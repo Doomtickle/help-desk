@@ -35,7 +35,7 @@ class BeeBoleController extends Controller
 
        foreach($companies as $company){
 	       	if($company['active']){
-	           Company::updateOrCreate([ 'name' => $company['name'], 'beebole_id' => $company['id'], 'status' => 'active' ]);
+	           Company::updateOrCreate([ 'name' => $company['name'], 'beebole_id' => $company['id'], 'status' => '1' ]);
 	       	}
        }
 
@@ -70,15 +70,12 @@ class BeeBoleController extends Controller
            $projectsArray = [];
 
            foreach($projects as $project){
-           	if($project['active']){
                Project::updateOrCreate([ 'name' => $project['name'], 
                 'beebole_id' => $project['id'], 
                 'company_id' => $company->id, 
                 'subprojects' => $project['subprojects']['count'] 
                 ]);
            }
-       }
-
     }
 
         return back();
