@@ -13,7 +13,7 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
-.login-page{
+.login-page, .register-page{
     background: url(/img/mountain.jpg);
     background-size:cover;
 }
