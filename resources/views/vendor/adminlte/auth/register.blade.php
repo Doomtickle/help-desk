@@ -10,7 +10,8 @@
     <div id="app">
         <div class="register-box">
             <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+                <a href="{{ url('/home') }}"><b>Kerigan</b>Marketing</a>
+                <small>Serious Efficiency</small>
             </div>
 
             @if (count($errors) > 0)
@@ -65,7 +66,6 @@
                     </div>
                 </form>
 
-                @include('adminlte::auth.partials.social_login')
 
                 <a href="{{ url('/login') }}" class="text-center">{{ trans('adminlte_lang::message.membreship') }}</a>
             </div><!-- /.form-box -->
