@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -24,8 +26,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        /**
+         * Every night at midnight, we'll archive the tickets that have been completed for a week
+         */
+        $schedule->call(function () {
+
+            DB::table('trouble_tickets')->whereRaw('completed_at <= DATE(now() - INTERVAL 6 DAY)')->update(['archived' => 1]);
+            })->daily();
     }
 
     /**
