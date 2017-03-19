@@ -64,7 +64,6 @@ class TroubleTicketController extends Controller
     {
         $admin                  = User::find(1);
         $troubleTicket          = TroubleTicket::create($request->all());
-        $troubleTicket->user_id = \Auth::user()->id;
 
         //Checks if a file was uploaded
         if($request->file('files')){
@@ -86,9 +85,6 @@ class TroubleTicketController extends Controller
             }
 
         }
-
-        $troubleTicket->save();
-
 
         $admin->notify(new TicketCreated($troubleTicket));
 

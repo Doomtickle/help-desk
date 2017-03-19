@@ -14,7 +14,7 @@ class AddActiveToCompanies extends Migration
     public function up()
     {
         Schema::table('companies', function (Blueprint $table) {
-            $table->integer('status');
+            $table->string('status')->default('inactive');
         });
     }
 

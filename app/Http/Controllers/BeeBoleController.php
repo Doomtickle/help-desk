@@ -35,7 +35,11 @@ class BeeBoleController extends Controller
 
        foreach($companies as $company){
 	       	if($company['active']){
-	           Company::updateOrCreate([ 'name' => $company['name'], 'beebole_id' => $company['id'], 'status' => '1' ]);
+	           Company::updateOrCreate([ 'name' => $company['name']], [
+              'name'       => $company['name'],
+              'beebole_id' => $company['id'],
+              'status'     => 'active'
+              ]);
 	       	}
        }
 
@@ -48,7 +52,7 @@ class BeeBoleController extends Controller
        $client = new Client();
        $beebole_key = \Auth::user()->beebole_key;
 
-       $companies = Company::all();
+       $companies = Company::where('status', 'active')->get();
        foreach($companies as $company){
            $response = $client->post('https://beebole-apps.com/api/v2', [
                'auth' => [
@@ -70,10 +74,11 @@ class BeeBoleController extends Controller
            $projectsArray = [];
 
            foreach($projects as $project){
-               Project::updateOrCreate([ 'name' => $project['name'], 
-                'beebole_id' => $project['id'], 
-                'company_id' => $company->id, 
-                'subprojects' => $project['subprojects']['count'] 
+               Project::updateOrCreate([ 'name' => $project['name']],[ 
+                'name'        => $project['name'],
+                'beebole_id'  => $project['id'],
+                'company_id'  => $company->id,
+                'subprojects' => $project['subprojects']['count']
                 ]);
            }
     }
@@ -108,8 +113,8 @@ class BeeBoleController extends Controller
 
             Task::updateOrCreate([
 
-                'name' => $task['name'], 
-                'beebole_id' => $task['beebole_id'], 
+                'name'       => $task['name'],
+                'beebole_id' => $task['beebole_id'],
 
             ]);
 
@@ -151,7 +156,8 @@ class BeeBoleController extends Controller
 
         if($subproject['active']){
           Subproject::updateOrCreate([ 
-            'name'       => $subproject['name'], 
+            'name'       => $subproject['name']], [
+            'name'       => $subproject['name'],
             'beebole_id' => $subproject['id'], 
             'project_id' => $project->id, 
             'company_id' => $project->company->id 

@@ -95,7 +95,7 @@
                             {{ csrf_field() }}
                             <input type="hidden" class="get-id" value="{{ $tt->id }}">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-danger btn-full-width">Mark Complete</button>
+                                <button type="submit" name="mark_complete" class="btn btn-danger btn-full-width" id="submit{{ $tt->id }}" value="Mark Complete"></button>
                             </div>
                         </form>
                         @endunless

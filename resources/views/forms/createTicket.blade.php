@@ -9,6 +9,7 @@
         </div>
     @endif
   {{ csrf_field() }}
+  <input type="hidden" name="user_id" value="{{ \Auth::user()->id }}">
   <div class="form-group">
       <input type="text" name="title" class="form-control" id="title" placeholder="Subject" value="{{ old('title') }}">
   </div>
@@ -26,14 +27,14 @@
   </div>
   <div class="form-group">
       <label for="category">Category</label>
-      <label class="radio-inline"><input type="radio" class="form-control" name="category" value="Web"> Web</label>
-      <label class="radio-inline"><input type="radio" class="form-control" name="category" value="Creative"> Creative</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="category" value="Web" id="web"> Web</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="category" value="Creative" id="creative"> Creative</label>
   </div>
   <div class="form-group">
       <label for="priority">Priority</label>
-      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="1"> 1</label>
-      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="2"> 2</label>
-      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="3"> 3</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="1" id="priority1"> 1</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="2" id="priority2"> 2</label>
+      <label class="radio-inline"><input type="radio" class="form-control" name="priority" value="3" id="priority3"> 3</label>
   </div>
 
   <div class="dropzone-previews"></div>

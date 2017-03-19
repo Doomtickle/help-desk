@@ -23,19 +23,28 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+$factory->define(App\Company::class, function (Faker\Generator $faker) {
+
+    return [
+        'name'           => $faker->name,
+        'beebole_id'     => $faker->numberBetween($min = 1000, $max = 9999)
+    ];
+});
 
 $factory->define(App\TroubleTicket::class, function (Faker\Generator $faker) {
 
-    $index = array_rand(App\Utilities\Company::all());
-    $company = App\Utilities\Company::find($index);
+    $user = factory('App\User')->create();
 
     return [
         'title'       => $faker->word,
-        'user_id'     => 1,
+        'user_id'     => $user->id,
         'description' => $faker->paragraph($nbSentences = 3, $variableNbSentences = true),
-        'website'     => $company,
+        'company'     => 'Tyndall Federal Credit Union',
+        'category'    => 'Web',
+        'status'      => 'Pending',
         'priority'    => $faker->numberBetween($min = 1, $max = 3),
-        'complete'    => $faker->boolean($chanceOfGettingTrue = 50)
+        'complete'    => $faker->boolean($chanceOfGettingTrue = 50),
+        'completed_at'=> ''
     ];
 
 });

@@ -15,6 +15,8 @@ class AddSubprojectsToCommentsTable extends Migration
     {
         Schema::table('comments', function (Blueprint $table) {
             $table->integer('subproject')->nullable();
+        });
+        Schema::table('comments', function (Blueprint $table) {
             $table->integer('subproject_beebole_id')->nullable();
         });
     }
@@ -28,6 +30,8 @@ class AddSubprojectsToCommentsTable extends Migration
     {
         Schema::table('comments', function(Blueprint $table){
             $table->dropColumn('subproject');
+        });
+        Schema::table('comments', function(Blueprint $table){
             $table->dropColumn('subproject_beebole_id');
         });
     }
