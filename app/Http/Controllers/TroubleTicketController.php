@@ -39,9 +39,7 @@ class TroubleTicketController extends Controller
      */
     public function index()
     {
-        $tickets = TroubleTicket::with('supportingFiles', 'comments')->orderBy('created_at', 'desc')->get();
-
-        return view('troubletickets.index', compact('tickets'));
+        //using HomeController@index for this route
     }
 
     /**

@@ -31,7 +31,7 @@ class Kernel extends ConsoleKernel
          */
         $schedule->call(function () {
 
-            DB::table('trouble_tickets')->whereRaw('completed_at <= DATE(now() - INTERVAL 6 DAY)')->update(['archived' => 1]);
+            DB::table('trouble_tickets')->whereRaw('completed_at IS NOT NULL AND completed_at <= DATE(now() - INTERVAL 6 DAY)')->update(['archived' => 1]);
             })->daily();
     }
 

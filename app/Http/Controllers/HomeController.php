@@ -35,7 +35,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $tickets = TroubleTicket::orderBy('created_at', 'desc')->get();
+        $tickets = TroubleTicket::where('archived', 0)->with('supportingFiles', 'comments')->orderBy('created_at', 'desc')->get();
         return view('adminlte::home', compact('tickets'));
     }
 
