@@ -15489,7 +15489,9 @@ body a {
 }
 
 .archive-btn {
-  float: right;
+  position: absolute;
+  top: 3px;
+  right: 3px;
 }
 
 .box-body li {

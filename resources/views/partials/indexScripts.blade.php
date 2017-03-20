@@ -166,4 +166,11 @@ function debounce( fn, threshold ) {
         $("input#end_date").Zebra_DatePicker();
     });
     </script>
+    <script>
+        $(document).ready(function(){
+           $('[data-toggle="tooltip"]').tooltip()
+        });
+    </script>
+
+
 

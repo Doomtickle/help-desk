@@ -20,7 +20,6 @@ elixir(function(mix) {
         .less('adminlte-app.less')
         .less('./node_modules/toastr/toastr.less')
         .styles([
-            './public/css/app.css',
             './node_modules/admin-lte/dist/css/skins/_all-skins.css',
             './public/css/adminlte-less.css',
             './public/css/adminlte-app.css',

@@ -56,7 +56,7 @@
                                 <div class="archive-btn">
                                     <form action="/archive/{{ $tt->id }}" method="POST" role="form">
                                         {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-primary">Archive</button>
+                                        <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Archive"><i class="fa fa-archive"></i></button>
                                     </form>
                                 </div>
                                 @endif
