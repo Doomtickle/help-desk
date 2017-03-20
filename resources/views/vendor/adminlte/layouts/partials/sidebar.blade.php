@@ -23,6 +23,7 @@
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-home'></i> <span>{{ trans('adminlte_lang::message.home') }}</span></a></li>
             <li><a href="/ticket/create"><i class='fa fa-edit'></i> <span>Create Task</span></a></li>
+            <li><a href="/archive"><i class="fa fa-archive"></i> <span>Archive</span></a></li>
             {{--<li class="treeview">--}}
                 {{--<a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>--}}
                 {{--<ul class="treeview-menu">--}}
