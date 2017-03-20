@@ -53,7 +53,7 @@
                             <div class="box-title">
                                 <h3>{{  $tt->title }}</h3>
                                 @if($tt->complete)
-                                <div class="archive-btn">
+                                <div class="archive-btn" style="position:absolute; top:3px; right:3px;">
                                     <form action="/archive/{{ $tt->id }}" method="POST" role="form">
                                         {{ csrf_field() }}
                                         <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Archive"><i class="fa fa-archive"></i></button>
