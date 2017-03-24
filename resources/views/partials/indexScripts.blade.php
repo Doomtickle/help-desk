@@ -123,6 +123,62 @@ function debounce( fn, threshold ) {
         });
     </script>
     <script>
+        $('.steal-it').submit(function (e) {
+
+            //TODO: find out why I have to do this
+            //this is a workaround for ajax requests sometimes throwing a 500 Internal Server
+            //error.  This will prefilter before each request.
+            $.ajaxPrefilter(function (options, originalOptions, xhr) { // this will run before each request
+                var token = $('meta[name="csrf-token"]').attr('content'); // or _token, whichever you are using
+
+                if (token) {
+                    return xhr.setRequestHeader('X-CSRF-TOKEN', token); // adds directly to the XmlHttpRequest Object
+                }
+            });
+
+            e.preventDefault();
+
+            var el = $(this);
+
+            //TODO:
+            //make this not suck so hard 
+            //
+            var id = el[0].children[1].value;
+            //this is the easiest way I can think of to get the trouble ticket id. 
+            //it's just a hidden form element at position el[0].children[2]
+
+            var myurl = "/steal/" + id;
+            $.ajax({
+                type: "POST",
+                url: myurl,
+                data: $(this).serialize(),
+                success: function (data) {
+                    var i;
+                    $("#comment-modal").attr("action", "/" + data.id + "/comment");
+                    $("#trouble_ticket_id").val(data.id);
+                    $("#company_id").val(data.company_id);
+                    $("#company_name").html(data.company_name);
+                    for (i = 0; i < data.projects.length; i++){
+                        $("select#projects").append( $("<option>")
+                            .val(data.projects[i].id)
+                            .html(data.projects[i].name)
+                        );
+                    }
+
+                    $('#myModal').modal("show");
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('There was an error processing your request. Please notify an administrator \n Error: ' + thrownError);
+                    console.log(xhr.status);
+                    console.log(xhr.responseText);
+                    console.log(thrownError);
+                }
+            })
+        });
+        
+    </script>
+    <script>
         $('select#projects').on('change', function () {
 
             var i;

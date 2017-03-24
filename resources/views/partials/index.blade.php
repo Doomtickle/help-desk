@@ -107,6 +107,16 @@
                                 </div>
                             </form>
                             @endunless
+                            @if($tt->complete)
+                                <form action="/steal/{{ $tt->id }}" id="steal{{ $tt->id }}" method="post" class="steal-it">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" class="get-id" value="{{ $tt->id }}">
+                                    <div class="form-group">
+                                        <button type="submit" name="steal-it" class="btn btn-success btn-full-width" id="steal{{ $tt->id }}" style="z-index:2" >Be a copycat</button>
+                                        <img src="/img/copycat.png" alt="CopyCat" class="img img-responsiver col-md-offset-3 col-md-6" style="margin-top:-20px; z-index:1"/>
+                                    </div>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
