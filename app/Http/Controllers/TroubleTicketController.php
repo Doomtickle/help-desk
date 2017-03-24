@@ -162,8 +162,6 @@ class TroubleTicketController extends Controller
         $this->sendUpdateNotifications($ticket, $changes);
         $ticket->save();
 
-
-
         $company     = Company::with('projects')->where('name', $ticket->company)->first();
         $projects    = $company->projects;
 

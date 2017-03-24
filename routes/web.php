@@ -30,6 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/archive', 'ArchiveController@index');
     Route::post('/archive/{ticket}', 'ArchiveController@sendToArchive');
 
+    Route::post('/steal/{ticket}', 'StealController@steal');
+
 
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
